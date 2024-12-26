@@ -1,4 +1,4 @@
-import { MenuType } from "@/types/menu";
+import { MenuType } from "@/types/menu"
 
 export const MENU: MenuType[] = [
   {
@@ -6,4 +6,4 @@ export const MENU: MenuType[] = [
     path: "/",
     children: [],
   },
-];
+]

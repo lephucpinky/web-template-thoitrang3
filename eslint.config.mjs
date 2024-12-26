@@ -1,20 +1,20 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import reactPlugin from "eslint-plugin-react";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
-import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
-import typescriptPlugin from "@typescript-eslint/eslint-plugin";
-import importPlugin from "eslint-plugin-import";
-import prettierPlugin from "eslint-plugin-prettier";
-import tailwindcssPlugin from "eslint-plugin-tailwindcss";
+import { FlatCompat } from "@eslint/eslintrc"
+import { fileURLToPath } from "url"
+import { dirname } from "path"
+import reactPlugin from "eslint-plugin-react"
+import reactHooksPlugin from "eslint-plugin-react-hooks"
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y"
+import typescriptPlugin from "@typescript-eslint/eslint-plugin"
+import importPlugin from "eslint-plugin-import"
+import prettierPlugin from "eslint-plugin-prettier"
+import tailwindcssPlugin from "eslint-plugin-tailwindcss"
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-});
+})
 
 export default [
   ...compat.extends(
@@ -22,7 +22,8 @@ export default [
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "next/core-web-vitals",
-    "next/typescript"
+    "next/typescript",
+    "prettier"
   ),
   {
     plugins: {
@@ -35,7 +36,7 @@ export default [
       tailwindcss: tailwindcssPlugin,
     },
     rules: {
-      "prettier/prettier": ["error", { singleQuote: false }], // Cho phép dấu nháy kép
+      "prettier/prettier": ["error", { singleQuote: false, semi: false }], // Cho phép dấu nháy kép
       "react/react-in-jsx-scope": "off", // Không cần import React trong Next.js
       "jsx-a11y/anchor-is-valid": "off", // Bỏ qua lỗi liên quan đến thẻ <Link> của Next.js
       "@typescript-eslint/explicit-module-boundary-types": "off", // Không bắt buộc khai báo kiểu trả về
@@ -49,4 +50,4 @@ export default [
     },
     ignores: ["node_modules", "dist", "build", ".next"],
   },
-];
+]
