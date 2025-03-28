@@ -2,14 +2,14 @@ import axios from "axios"
 
 // Tạo instance Axios
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api", // Base URL của API
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.142:4004/api/v1", // Base URL của API
   timeout: 10000, // Thời gian chờ request
 })
 
 // Request Interceptor: Thêm token vào header nếu cần
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("accessToken") // Lấy token từ localStorage
+    const token = localStorage.getItem("access_token") // Lấy token từ localStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
