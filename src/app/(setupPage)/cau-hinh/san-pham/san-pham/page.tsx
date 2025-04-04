@@ -1,44 +1,44 @@
-"use client";
-import AlertError from "@/components/alert/AlertError";
-import AlertOption from "@/components/alert/AlertOption";
-import AlertSuccess from "@/components/alert/AlertSuccess";
-import CheckboxLabel from "@/components/checkbox/CheckBox";
-import CustomButtonUploadImage from "@/components/customButtomUploadImage/customButtonUploadImage";
-import InputConfig from "@/components/inputComponent/inputRegisterLecture";
-import TextAreaConfig from "@/components/inputComponent/textAreaConfig";
-import SelectType from "@/components/select/Select";
-import ColumnsProduct from "@/components/table/ColumnProduct";
-import { DataTable } from "@/components/table/DataTable";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+"use client"
+import AlertError from "@/components/alert/AlertError"
+import AlertOption from "@/components/alert/AlertOption"
+import AlertSuccess from "@/components/alert/AlertSuccess"
+import CheckboxLabel from "@/components/checkbox/CheckBox"
+import CustomButtonUploadImage from "@/components/customButtomUploadImage/customButtonUploadImage"
+import InputConfig from "@/components/inputComponent/inputRegisterLecture"
+import TextAreaConfig from "@/components/inputComponent/textAreaConfig"
+import SelectType from "@/components/select/Select"
+import ColumnsProduct from "@/components/table/ColumnProduct"
+import { DataTable } from "@/components/table/DataTable"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { APIGetCategories } from "@/services/category";
+} from "@/components/ui/tooltip"
+import { APIGetCategories } from "@/services/category"
 import {
   APICreateNewProduct,
   APIDeleteProduct,
   APIGetProductById,
   APIGetProducts,
   APIUpdateProduct,
-} from "@/services/product";
-import { setMode } from "@/store/slices/modeSlice";
+} from "@/services/product"
+import { setMode } from "@/store/slices/modeSlice"
 import {
   clearProduct,
   setIsDeleteProduct,
   setProduct,
-} from "@/store/slices/productSlice";
-import { RootState } from "@/store/store";
-import { ClassificationItem, ProductFormData } from "@/types/productType";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { CopyPlus } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import * as Yup from "yup";
+} from "@/store/slices/productSlice"
+import { RootState } from "@/store/store"
+import { ClassificationItem, ProductFormData } from "@/types/productType"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { CopyPlus } from "lucide-react"
+import React, { useEffect, useState } from "react"
+import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
 
 const ConfigValidationSchema = Yup.object({
   product_name: Yup.string().required("Tên sản phẩm là bắt buộc"),
@@ -52,22 +52,22 @@ const ConfigValidationSchema = Yup.object({
   material: Yup.string().optional(),
   code: Yup.string().optional(),
   warranty: Yup.string().optional(),
-});
+})
 
 interface CategoryListItem {
-  value: string;
-  id: string;
+  value: string
+  id: string
 }
 
 interface CategoryObject {
-  _id: string;
-  category_name: string;
-  category_image: string;
-  description: string;
-  customer: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  _id: string
+  category_name: string
+  category_image: string
+  description: string
+  customer: string
+  createdAt: string
+  updatedAt: string
+  __v: number
 }
 
 const Page = () => {
@@ -96,34 +96,34 @@ const Page = () => {
       priority: false,
       additional_services: [],
     },
-  });
+  })
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "classification",
-  });
+  })
 
-  const mode = useSelector((state: RootState) => state.mode.modeInfo.mode);
-  const product = useSelector((state: RootState) => state.product.product);
+  const mode = useSelector((state: RootState) => state.mode.modeInfo.mode)
+  const product = useSelector((state: RootState) => state.product.product)
   const isDeleteProduct = useSelector(
     (state: RootState) => state.product.setIsDeleteProduct
-  );
-  const dispatch = useDispatch();
+  )
+  const dispatch = useDispatch()
 
-  const [imageList, setImageList] = useState<any[]>([]);
-  const [dataTable, setDataTable] = useState([]);
-  const [able, setAble] = useState(false);
-  const [showAlertSuccess, setShowAlertSuccess] = useState(false);
-  const [showAlertError, setShowAlertError] = useState(false);
-  const [alertDescription, setAlertDescription] = useState("");
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
-  const [totalItems, setTotalItems] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [imageList, setImageList] = useState<any[]>([])
+  const [dataTable, setDataTable] = useState([])
+  const [able, setAble] = useState(false)
+  const [showAlertSuccess, setShowAlertSuccess] = useState(false)
+  const [showAlertError, setShowAlertError] = useState(false)
+  const [alertDescription, setAlertDescription] = useState("")
+  const [isDialogOpen, setDialogOpen] = useState<boolean>(false)
+  const [totalItems, setTotalItems] = useState(0)
+  const [loading, setLoading] = useState(false)
   const [filterForm, setFilterForm] = useState<any>({
     page: 1,
     limit: 10,
-  });
-  const [categoryList, setCategoryList] = useState<CategoryListItem[]>([]);
+  })
+  const [categoryList, setCategoryList] = useState<CategoryListItem[]>([])
 
   useEffect(() => {
     if (product._id) {
@@ -150,251 +150,251 @@ const Page = () => {
         })),
         priority: product.priority,
         additional_services: product.additional_services,
-      });
-      setImageList(product.images || []);
-      setAble(true);
+      })
+      setImageList(product.images || [])
+      setAble(true)
     }
-  }, [product]);
+  }, [product])
 
   useEffect(() => {
-    handleClearData();
-    handleSetMode("create");
-  }, []);
+    handleClearData()
+    handleSetMode("create")
+  }, [])
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const files = event.target.files;
-    if (!files?.length) return;
+    const files = event.target.files
+    if (!files?.length) return
 
-    console.log("Files selected:", files);
+    console.log("Files selected:", files)
 
     // Tạo array chứa tất cả promises của việc đọc file
     const readFilePromises = Array.from(files).map(
       (file) =>
         new Promise<string>((resolve) => {
-          const reader = new FileReader();
+          const reader = new FileReader()
           reader.onloadend = () => {
-            resolve(reader.result as string);
-          };
-          reader.readAsDataURL(file);
+            resolve(reader.result as string)
+          }
+          reader.readAsDataURL(file)
         })
-    );
+    )
 
     try {
       // Đợi tất cả files được đọc xong
-      const newImages = await Promise.all(readFilePromises);
-      console.log("Processed images:", newImages);
+      const newImages = await Promise.all(readFilePromises)
+      console.log("Processed images:", newImages)
 
       // Cập nhật state và form một lần duy nhất
       setImageList((prevList) => {
-        const updatedList = [...prevList, ...newImages];
-        setValue("images", updatedList);
-        return updatedList;
-      });
+        const updatedList = [...prevList, ...newImages]
+        setValue("images", updatedList)
+        return updatedList
+      })
     } catch (error) {
-      console.error("Error processing images:", error);
+      console.error("Error processing images:", error)
     }
-  };
+  }
 
   const handleRemoveImage = (index: number) => {
-    const removedImage = imageList[index];
-    const updatedImages = imageList.filter((_, i) => i !== index);
-    setImageList(updatedImages);
-    setValue("images", updatedImages);
-    const currentImageDelete = getValues("images_delete") || [];
-    setValue("images_delete", [...currentImageDelete, removedImage]);
-  };
+    const removedImage = imageList[index]
+    const updatedImages = imageList.filter((_, i) => i !== index)
+    setImageList(updatedImages)
+    setValue("images", updatedImages)
+    const currentImageDelete = getValues("images_delete") || []
+    setValue("images_delete", [...currentImageDelete, removedImage])
+  }
 
   const handleClearData = () => {
-    reset();
-    setImageList([]);
-    dispatch(clearProduct());
-  };
+    reset()
+    setImageList([])
+    dispatch(clearProduct())
+  }
 
   const handleSetMode = (mode: string) => {
-    dispatch(setMode({ mode: mode }));
-  };
+    dispatch(setMode({ mode: mode }))
+  }
 
   const onSubmit = async (data: any) => {
     const validClassifications = data.classification?.map((item: any) => ({
       ...item,
       price: Number(item.price) || 0,
       remaining: Number(item.remaining) || 0,
-    }));
+    }))
 
     const body = {
       ...data,
       classification: validClassifications,
       images: imageList,
-    };
+    }
 
     if (mode === "create") {
-      await handleCreateProduct(body);
+      await handleCreateProduct(body)
     } else if (mode === "view") {
-      setAble(false);
-      handleSetMode("edit");
+      setAble(false)
+      handleSetMode("edit")
     } else if (mode === "edit" && product._id) {
       const classification_update = body.classification.filter(
         (item: any) => item._id
-      );
+      )
       console.log(
         "🚀 ~ onSubmit ~ classification_update:",
         classification_update
-      );
+      )
 
       const classification_delete = product.classification.filter(
         (item: any) =>
           !body.classification
             .filter((bodyItem: CategoryObject) => bodyItem._id)
             .some((bodyItem: CategoryObject) => bodyItem._id === item._id)
-      );
+      )
       const classification_add = body.classification.filter(
         (item: any) => !item._id
-      );
+      )
       const body_update = {
         ...body,
         classification: classification_update,
         classification_add: classification_add,
         classification_delete: classification_delete,
         classification_update: classification_update,
-      };
-      await handleUpdateProduct(body_update, product._id);
-      handleSetMode("view");
+      }
+      await handleUpdateProduct(body_update, product._id)
+      handleSetMode("view")
     }
-  };
+  }
 
   const handleCreateProduct = async (data: any) => {
     try {
-      const response = await APICreateNewProduct(data);
+      const response = await APICreateNewProduct(data)
       if (response?.status === 201) {
-        setAlertDescription("Thêm sản phẩm thành công!");
-        setShowAlertSuccess(true);
-        handleGetProductList();
-        handleSetMode("view");
-        if (response?.data._id) handleGetProduct(response.data._id);
-        setTimeout(() => setShowAlertSuccess(false), 3000);
+        setAlertDescription("Thêm sản phẩm thành công!")
+        setShowAlertSuccess(true)
+        handleGetProductList()
+        handleSetMode("view")
+        if (response?.data._id) handleGetProduct(response.data._id)
+        setTimeout(() => setShowAlertSuccess(false), 3000)
       } else {
-        setAlertDescription("Thêm sản phẩm thất bại!");
-        setShowAlertError(true);
-        setTimeout(() => setShowAlertError(false), 3000);
+        setAlertDescription("Thêm sản phẩm thất bại!")
+        setShowAlertError(true)
+        setTimeout(() => setShowAlertError(false), 3000)
       }
     } catch (err) {
-      setAlertDescription("Thêm sản phẩm thất bại!");
-      setShowAlertError(true);
-      setTimeout(() => setShowAlertError(false), 3000);
+      setAlertDescription("Thêm sản phẩm thất bại!")
+      setShowAlertError(true)
+      setTimeout(() => setShowAlertError(false), 3000)
     }
-  };
+  }
 
   const handleGetProduct = async (id: string) => {
     try {
-      const response = await APIGetProductById(id);
+      const response = await APIGetProductById(id)
       if (response?.status === 200) {
-        dispatch(setProduct(response.data));
-        dispatch(setMode({ mode: "view" }));
+        dispatch(setProduct(response.data))
+        dispatch(setMode({ mode: "view" }))
         // Cập nhật form với dữ liệu sản phẩm
-        reset(response.data);
-        setImageList(response.data.images || []);
+        reset(response.data)
+        setImageList(response.data.images || [])
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
 
   const handleGetProductList = async () => {
     try {
-      setLoading(true);
-      const response = await APIGetProducts(filterForm);
+      setLoading(true)
+      const response = await APIGetProducts(filterForm)
       if (response?.status === 200) {
-        setTotalItems(response?.total);
+        setTotalItems(response?.total)
         const data = response?.data.map((item: any) => ({
           ...item,
           category_name: item.category_id?.category_name,
-        }));
-        setDataTable(data);
+        }))
+        setDataTable(data)
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleUpdateProduct = async (data: any, id: string) => {
     try {
-      const response = await APIUpdateProduct(data, id);
+      const response = await APIUpdateProduct(data, id)
       if (response?.status === 200) {
-        setAlertDescription("Cập nhật sản phẩm thành công!");
-        setShowAlertSuccess(true);
-        handleGetProductList();
-        if (product._id) handleGetProduct(product._id);
-        setValue("images_delete", []);
-        setTimeout(() => setShowAlertSuccess(false), 3000);
+        setAlertDescription("Cập nhật sản phẩm thành công!")
+        setShowAlertSuccess(true)
+        handleGetProductList()
+        if (product._id) handleGetProduct(product._id)
+        setValue("images_delete", [])
+        setTimeout(() => setShowAlertSuccess(false), 3000)
       } else {
-        setAlertDescription("Cập nhật sản phẩm thất bại!");
-        setShowAlertError(true);
-        setTimeout(() => setShowAlertError(false), 3000);
+        setAlertDescription("Cập nhật sản phẩm thất bại!")
+        setShowAlertError(true)
+        setTimeout(() => setShowAlertError(false), 3000)
       }
     } catch (err) {
-      setAlertDescription("Cập nhật sản phẩm thất bại!");
-      setShowAlertError(true);
-      setTimeout(() => setShowAlertError(false), 3000);
+      setAlertDescription("Cập nhật sản phẩm thất bại!")
+      setShowAlertError(true)
+      setTimeout(() => setShowAlertError(false), 3000)
     }
-  };
+  }
 
   const handleDeleteProduct = async (id: string) => {
     try {
-      const response = await APIDeleteProduct(id);
+      const response = await APIDeleteProduct(id)
       if (response?.status === 200) {
-        setAlertDescription("Xóa sản phẩm thành công!");
-        setShowAlertSuccess(true);
-        handleClearData();
-        handleGetProductList();
-        handleSetMode("create");
-        setTimeout(() => setShowAlertSuccess(false), 3000);
+        setAlertDescription("Xóa sản phẩm thành công!")
+        setShowAlertSuccess(true)
+        handleClearData()
+        handleGetProductList()
+        handleSetMode("create")
+        setTimeout(() => setShowAlertSuccess(false), 3000)
       }
     } catch (err) {
-      setAlertDescription("Xóa sản phẩm thất bại!");
-      setShowAlertError(true);
-      setTimeout(() => setShowAlertError(false), 3000);
+      setAlertDescription("Xóa sản phẩm thất bại!")
+      setShowAlertError(true)
+      setTimeout(() => setShowAlertError(false), 3000)
     }
-  };
+  }
 
   const handleGetCategories = async () => {
-    const response = await APIGetCategories();
+    const response = await APIGetCategories()
     if (response?.status === 200) {
       setCategoryList(
         response.data.map((item: any) => ({
           value: item.category_name,
           id: item._id,
         }))
-      );
+      )
     }
-  };
+  }
 
   useEffect(() => {
-    handleGetCategories();
-    handleGetProductList();
-  }, [filterForm]);
+    handleGetCategories()
+    handleGetProductList()
+  }, [filterForm])
 
   useEffect(() => {
-    dispatch(setMode({ mode: "create" }));
-    handleClearData();
-  }, []);
+    dispatch(setMode({ mode: "create" }))
+    handleClearData()
+  }, [])
 
   useEffect(() => {
     if (isDeleteProduct) {
-      handleGetProductList();
-      dispatch(setIsDeleteProduct(false));
-      handleSetMode("create");
-      handleClearData();
+      handleGetProductList()
+      dispatch(setIsDeleteProduct(false))
+      handleSetMode("create")
+      handleClearData()
     }
-  }, [isDeleteProduct]);
+  }, [isDeleteProduct])
 
   return (
-    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
+    <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
-        <p className="text-black font-sans text-[20px] font-medium">
+        <p className="font-sans text-[20px] font-medium text-black">
           Danh sách sản phẩm
         </p>
         <TooltipProvider>
@@ -405,13 +405,13 @@ const Page = () => {
                 size={18}
                 color="#2a435d"
                 onClick={() => {
-                  handleSetMode("create");
-                  handleClearData();
+                  handleSetMode("create")
+                  handleClearData()
                 }}
               />
             </TooltipTrigger>
             <TooltipContent>
-              <p className="rounded-md bg-Charcoal p-2 text-White shadow-sm">
+              <p className="bg-Charcoal text-White rounded-md p-2 shadow-sm">
                 Thêm mới
               </p>
             </TooltipContent>
@@ -436,9 +436,9 @@ const Page = () => {
         />
       </div>
 
-      <div className="mt-6 border border-LightSilver p-4 rounded-md">
-        <div className="flex flex-col gap-4 mb-4">
-          <p className="text-black font-sans text-[20px] font-medium text-Charcoal">
+      <div className="border-LightSilver mt-6 rounded-md border p-4">
+        <div className="mb-4 flex flex-col gap-4">
+          <p className="text-Charcoal font-sans text-[20px] font-medium text-black">
             Thông tin sản phẩm
           </p>
         </div>
@@ -461,7 +461,7 @@ const Page = () => {
               name="category_id"
               control={control}
               render={({ field }) => {
-                console.log("Current field value:", field.value);
+                console.log("Current field value:", field.value)
                 return (
                   <SelectType
                     data={categoryList}
@@ -472,7 +472,7 @@ const Page = () => {
                       able
                         ? typeof field.value === "string" && field.value
                           ? categoryList.find((cat) => {
-                              return cat.id === field.value;
+                              return cat.id === field.value
                             })?.id
                           : ""
                         : field.value
@@ -480,7 +480,7 @@ const Page = () => {
                     onChange={(e) => field.onChange(e)}
                     className="w-full"
                   />
-                );
+                )
               }}
             />
 
@@ -569,14 +569,14 @@ const Page = () => {
 
           {/* Phần classification */}
           <div className="mt-4">
-            <Label className="text-Charcoal font-semibold text-[16px]">
+            <Label className="text-Charcoal text-[16px] font-semibold">
               Phân loại sản phẩm
             </Label>
-            <div className="flex flex-col gap-4 mt-2">
+            <div className="mt-2 flex flex-col gap-4">
               {fields.map((field, index) => (
                 <div
                   key={field.id}
-                  className="flex flex-col gap-4 border border-LightSilver p-4 rounded-md"
+                  className="border-LightSilver flex flex-col gap-4 rounded-md border p-4"
                 >
                   {/* Classification Items */}
                   <div className="grid grid-cols-2 gap-4">
@@ -595,10 +595,10 @@ const Page = () => {
                                 <InputConfig
                                   value={item.classification_name}
                                   onChange={(e) => {
-                                    const newValue = [...field.value];
+                                    const newValue = [...field.value]
                                     newValue[itemIndex].classification_name =
-                                      e.target.value;
-                                    field.onChange(newValue);
+                                      e.target.value
+                                    field.onChange(newValue)
                                   }}
                                   labelText="Tên phân loại"
                                   placeholder="VD: Size, Màu sắc..."
@@ -607,10 +607,10 @@ const Page = () => {
                                 <InputConfig
                                   value={item.classification_value}
                                   onChange={(e) => {
-                                    const newValue = [...field.value];
+                                    const newValue = [...field.value]
                                     newValue[itemIndex].classification_value =
-                                      e.target.value;
-                                    field.onChange(newValue);
+                                      e.target.value
+                                    field.onChange(newValue)
                                   }}
                                   labelText="Giá trị"
                                   placeholder="VD: M, Đỏ..."
@@ -622,11 +622,11 @@ const Page = () => {
                                     variant="outline"
                                     disabled={able}
                                     onClick={() => {
-                                      const newValue = [...field.value];
-                                      newValue.splice(itemIndex, 1);
-                                      field.onChange(newValue);
+                                      const newValue = [...field.value]
+                                      newValue.splice(itemIndex, 1)
+                                      field.onChange(newValue)
                                     }}
-                                    className="border border-LightSilver rounded-md"
+                                    className="border-LightSilver rounded-md border"
                                   >
                                     Xóa
                                   </Button>
@@ -645,7 +645,7 @@ const Page = () => {
                                     classification_name: "",
                                     classification_value: "",
                                   },
-                                ]);
+                                ])
                               }}
                               className="w-fit"
                             >
@@ -690,19 +690,19 @@ const Page = () => {
                           </Button> */}
                           <CustomButtonUploadImage
                             onImageUpload={() => {
-                              const input = document.createElement("input");
-                              input.type = "file";
+                              const input = document.createElement("input")
+                              input.type = "file"
                               input.onchange = (e: any) => {
-                                const file = e.target.files?.[0];
+                                const file = e.target.files?.[0]
                                 if (file) {
-                                  const reader = new FileReader();
+                                  const reader = new FileReader()
                                   reader.onloadend = () => {
-                                    field.onChange(reader.result);
-                                  };
-                                  reader.readAsDataURL(file);
+                                    field.onChange(reader.result)
+                                  }
+                                  reader.readAsDataURL(file)
                                 }
-                              };
-                              input.click();
+                              }
+                              input.click()
                             }}
                             disabled={able}
                           />
@@ -724,14 +724,14 @@ const Page = () => {
                                   className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
                                   onClick={() => {
                                     const currentImagesDelete =
-                                      getValues("images_delete") || [];
+                                      getValues("images_delete") || []
                                     if (!field.value.startsWith("data:image")) {
                                       setValue("images_delete", [
                                         ...currentImagesDelete,
                                         field.value,
-                                      ]);
+                                      ])
                                     }
-                                    field.onChange("");
+                                    field.onChange("")
                                   }}
                                 >
                                   ×
@@ -782,7 +782,7 @@ const Page = () => {
                       type="button"
                       variant="default"
                       onClick={() => remove(index)}
-                      className="w-fit bg-PersianRed text-White"
+                      className="bg-PersianRed text-White w-fit"
                     >
                       Xóa phân loại
                     </Button>
@@ -839,7 +839,7 @@ const Page = () => {
               />
             )}
             {errors.images && (
-              <p className="text-red-500 text-sm">{errors.images.message}</p>
+              <p className="text-sm text-red-500">{errors.images.message}</p>
             )}
             <div className="flex flex-wrap gap-2">
               {imageList?.map((image: string, index) => (
@@ -888,8 +888,8 @@ const Page = () => {
                 type="button"
                 className="bg-Charcoal text-White"
                 onClick={() => {
-                  setAble(false);
-                  handleSetMode("edit");
+                  setAble(false)
+                  handleSetMode("edit")
                 }}
               >
                 Chỉnh sửa
@@ -913,7 +913,7 @@ const Page = () => {
       {showAlertSuccess && <AlertSuccess description={alertDescription} />}
       {showAlertError && <AlertError description={alertDescription} />}
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

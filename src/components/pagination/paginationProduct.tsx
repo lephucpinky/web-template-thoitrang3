@@ -1,6 +1,6 @@
-'use client';
+"use client"
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from "next/navigation"
 import {
   Pagination,
   PaginationContent,
@@ -8,12 +8,12 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from "@/components/ui/pagination"
 
 interface PaginationProps {
-  totalItems: number;
-  itemsPerPage?: number;
-  handlePageChange?: (page: number) => void;
+  totalItems: number
+  itemsPerPage?: number
+  handlePageChange?: (page: number) => void
 }
 
 const PaginationComponent: React.FC<PaginationProps> = ({
@@ -21,12 +21,12 @@ const PaginationComponent: React.FC<PaginationProps> = ({
   itemsPerPage = 10,
   handlePageChange,
 }) => {
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const searchParams = useSearchParams()
+  const currentPage = Number(searchParams.get("page")) || 1
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
 
   // Nếu chỉ có 1 trang thì không cần hiển thị pagination
-  if (totalPages <= 1) return null;
+  // if (totalPages <= 1) return null
 
   return (
     <Pagination>
@@ -40,14 +40,14 @@ const PaginationComponent: React.FC<PaginationProps> = ({
               handlePageChange(currentPage - 1)
             }
             className={
-              currentPage === 1 ? 'pointer-events-none opacity-50' : ''
+              currentPage === 1 ? "pointer-events-none opacity-50" : ""
             }
           />
         </PaginationItem>
 
         {/* Hiển thị danh sách trang */}
         {Array.from({ length: totalPages }, (_, index) => {
-          const page = index + 1;
+          const page = index + 1
           return (
             <PaginationItem
               key={page}
@@ -60,7 +60,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 {page}
               </PaginationLink>
             </PaginationItem>
-          );
+          )
         })}
 
         {/* Nút Next */}
@@ -72,13 +72,13 @@ const PaginationComponent: React.FC<PaginationProps> = ({
               handlePageChange(currentPage + 1)
             }
             className={
-              currentPage === totalPages ? 'pointer-events-none opacity-50' : ''
+              currentPage === totalPages ? "pointer-events-none opacity-50" : ""
             }
           />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  );
-};
+  )
+}
 
-export default PaginationComponent;
+export default PaginationComponent

@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>{String(metadata.title) ?? "Default Title"}</title>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[#FFFAF0] antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white antialiased`}
       >
         <Provider store={store}>{children}</Provider>
       </body>

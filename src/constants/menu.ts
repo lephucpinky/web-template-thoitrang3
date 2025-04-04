@@ -18,9 +18,14 @@ export const MENU: MenuType[] = [
     children: [],
   },
 ]
+interface products {
+  id: string,
+  name: string,
+  price: string
+  imageUrl: string
+}
 
-
-export const products = [
+export const Products = [
   {
     id: "1",
     name: "Áo khoác nam",

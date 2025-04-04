@@ -5,9 +5,19 @@ import collection from "../../assets/images/Link (5).png"
 import { useEffect, useState } from "react"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
+import ProductGrid from "../product/ProductGrid"
+import { Products } from "@/constants/menu"
+import { useRouter } from "next/navigation"
+import { colorConfig } from "../config/InputConfig"
+interface ProductCardProps {
+  product: ProductFormData
+  textColor?: string
+}
 
-export default function SaleProduct() {
-  const [product, setProduct] = useState<ProductFormData[]>([])
+export default function SaleProduct({ product }: ProductCardProps) {
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
+  const router = useRouter()
+  const [products, setProduct] = useState<ProductFormData[]>([])
   const [filterForm, setFilterForm] = useState<any>({
     page: 1,
     limit: 10000,
@@ -27,13 +37,14 @@ export default function SaleProduct() {
       console.error(error)
     }
   }
+
   useEffect(() => {
     handleGetProductList()
   })
   return (
-    <section className="bg-green-800 py-6 font-[Montserrat]">
+    <section className="bg-[#1c5b27] py-6 font-[Montserrat]">
       <div className="mx-auto max-w-7xl px-4">
-        <h2 className="mb-4 text-xl font-bold text-white md:text-2xl">
+        <h2 className="mb-4 text-xl font-bold text-White md:text-2xl">
           SALE ĐỒNG GIÁ - ĐỪNG LO VỀ GIÁ
         </h2>
 
@@ -45,19 +56,25 @@ export default function SaleProduct() {
               alt="/"
               width={1000}
               height={200}
-              className="h-auto w-full rounded-lg bg-yellow-400"
+              className="bg-yellow-400 h-auto w-full rounded-lg"
             />
           </div>
         </div>
 
         {/* Sale Products */}
-        <div className="-mx-2 flex flex-wrap">
-          {product.slice(0, 5).map((item, index) => (
-            <div key={index} className="mb-6 w-full px-2 sm:w-1/2 md:w-1/5">
-              <ProductCard key={item._id} product={item} />
-            </div>
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 md:grid-cols-5">
+            {products.slice(0, 5).map((item: ProductFormData) => (
+              <ProductCard
+                product={item}
+                key={item._id}
+                textColor="!text-White"
+              />
+            ))}
+          </div>
+        ) : (
+          <p>Không có sản phẩm nào</p>
+        )}
       </div>
     </section>
   )

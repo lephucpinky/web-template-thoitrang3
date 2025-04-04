@@ -8,14 +8,25 @@ import { Card, CardContent, CardFooter } from "../ui/card"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
 import ProductCard from "../product/ProductCard"
+import ProductGrid from "../product/ProductGrid"
+import { Products } from "@/constants/menu"
+import { useRouter } from "next/navigation"
+import { colorConfig } from "../config/InputConfig"
+interface ProductCardProps {
+  product: ProductFormData
+  textColor?: string
+}
 
-export default function PriceGoodProduct() {
-  const [product, setProduct] = useState<ProductFormData[]>([])
+export default function PriceGoodProduct({ product }: ProductCardProps) {
+  const router = useRouter()
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
+  const [products, setProduct] = useState<ProductFormData[]>([])
   const [filterForm, setFilterForm] = useState<any>({
     page: 1,
     limit: 10000,
     priority: true,
   })
+
   const handleGetProductList = async () => {
     try {
       const response = await APIGetProducts(filterForm)
@@ -34,31 +45,27 @@ export default function PriceGoodProduct() {
     handleGetProductList()
   })
   return (
-    <section className="bg-[#FFFAF0] pt-16">
+    <section className="mb-4 bg-[#FFFAF0] pt-16 font-[Montserrat]">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader title="SẢN PHẨM GIÁ TỐT" />
         <div className="flex flex-col gap-4 lg:flex-row">
           <div className="w-full lg:w-1/2">
             <div className="h-full overflow-hidden">
-              <div className="relative min-h-[600px] min-w-[450px]">
-                <Image
-                  src={banner}
-                  alt=""
-                  width={450}
-                  height={600}
-                  className="absolute object-cover"
-                />
+              <div className="relative h-full w-full">
+                <Image src={banner} alt="" fill className="object-cover" />
               </div>
             </div>
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="flex flex-wrap">
-              {product.slice(0, 6).map((item, index) => (
-                <div key={index} className="w-full p-2 sm:w-1/2 md:w-1/3">
-                  <ProductCard key={item._id} product={item} />
-                </div>
-              ))}
-            </div>
+            {products.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 p-2 md:grid-cols-3">
+                {products.slice(0, 6).map((item: ProductFormData) => (
+                  <ProductCard product={item} key={item._id} />
+                ))}
+              </div>
+            ) : (
+              <p>Không có sản phẩm nào</p>
+            )}
           </div>
         </div>
       </div>

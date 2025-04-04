@@ -1,12 +1,20 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import left from "../../assets/icons/icon1.png"
-import right from "../../assets/icons/icon2.png"
-import Image from "next/image"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { APIGetCategories } from "@/services/category"
-import { ProductFormData } from "@/types/productType"
+import type { ProductFormData } from "@/types/productType"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel"
+import { cn } from "@/lib/utils"
 import { APIGetProducts } from "@/services/product"
+
 interface SectionHeaderProps {
   title: string
   showViewAll?: boolean
@@ -24,6 +32,8 @@ export default function SectionHeader({
   title,
   showViewAll = true,
 }: SectionHeaderProps) {
+  const [activeCategory, setActiveCategory] = useState("1")
+
   const router = useRouter()
   const [categorys, setCategorys] = useState<
     { _id: string; category_name: string }[]
@@ -44,6 +54,7 @@ export default function SectionHeader({
     price: undefined,
     original_price: undefined,
   })
+
   const handleGetProductList = async () => {
     try {
       const response = await APIGetProducts(filterForm)
@@ -59,6 +70,7 @@ export default function SectionHeader({
       console.error(err)
     }
   }
+
   const handleSelectCategory = (id: string) => {
     setSelectedCategory(id)
     setFilterForm((prev) => ({
@@ -68,6 +80,7 @@ export default function SectionHeader({
 
     router.push(`${pathName}?category_id=${id}`, { scroll: false })
   }
+
   const handleGetCategories = async () => {
     try {
       const response = await APIGetCategories()
@@ -83,43 +96,56 @@ export default function SectionHeader({
       console.error(err)
     }
   }
+
   useEffect(() => {
     handleGetProductList()
   }, [filterForm])
+
   useEffect(() => {
     handleGetCategories()
     handleGetProductList()
   }, [])
+
   return (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="mb-4 flex items-center justify-between pl-4">
       <h2 className="font-[Montserrat] text-lg font-bold uppercase text-[#1C5B41] lg:text-2xl">
         {title}
       </h2>
-      <div className="flex items-center gap-2">
-        {showViewAll && (
-          <Button variant="ghost" size="sm">
-            <Image src={left} alt="" width={20} height={20} />
-          </Button>
-        )}
-        {categorys.slice(0, 5).map((item, index) => (
-          <div className="flex gap-1 font-[Nunito]">
-            <Button
-              key={index}
-              variant="outline"
-              size="sm"
-              className="rounded-full bg-[#f5a623] text-white hover:bg-[#e09000]"
-              onClick={() => handleSelectCategory(item?._id)}
-            >
-              {item.category_name}
-            </Button>
-          </div>
-        ))}
 
-        {showViewAll && (
-          <Button variant="ghost" size="sm">
-            <Image src={right} alt="" width={20} height={20} />
-          </Button>
-        )}
+      <div className="relative w-3/4 lg:w-1/3">
+        <Carousel
+          opts={{
+            align: "start",
+            slidesToScroll: 1,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {categorys.slice(0, 5).map((item, index) => (
+              <CarouselItem
+                key={item._id}
+                className="pl-1 md:basis-1/3 lg:basis-1/4"
+              >
+                <button
+                  className={cn(
+                    "w-full whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors",
+                    activeCategory === item._id
+                      ? "bg-White text-Black"
+                      : "bg-White text-Black hover:bg-[#e09000]"
+                  )}
+                  onClick={() => {
+                    setActiveCategory(item._id)
+                    handleSelectCategory(item._id)
+                  }}
+                >
+                  {item.category_name}
+                </button>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-0 top-1/2 h-8 w-8 -translate-y-1/2 rounded-none border-none shadow-none hover:bg-[#e09000] lg:-left-[10%]" />
+          <CarouselNext className="absolute right-0 top-1/2 h-8 w-8 -translate-y-1/2 rounded-none border-none shadow-none hover:bg-[#e09000] lg:-right-[10%]" />
+        </Carousel>
       </div>
     </div>
   )

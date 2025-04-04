@@ -5,9 +5,17 @@ import banner from "../../assets/images/bannern.png"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
 import ProductCard from "../product/ProductCard"
-
-export default function NewProduct() {
-  const [product, setProduct] = useState<ProductFormData[]>([])
+import ProductGrid from "../product/ProductGrid"
+import { Products } from "@/constants/menu"
+import { useRouter } from "next/navigation"
+interface ProductCardProps {
+  product: ProductFormData
+  textColor?: string
+}
+export default function NewProduct({ product }: ProductCardProps) {
+  const router = useRouter()
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
+  const [products, setProduct] = useState<ProductFormData[]>([])
   const [filterForm, setFilterForm] = useState<any>({
     page: 1,
     limit: 10000,
@@ -27,35 +35,32 @@ export default function NewProduct() {
       console.error(error)
     }
   }
+
   useEffect(() => {
     handleGetProductList()
   })
   return (
-    <section className="bg-white pt-16 font-[Montserrat]">
+    <section className="mb-4 bg-White pt-16 font-[Montserrat]">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader title="HÀNG MỚI VỀ" />
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-1/2">
             <div className="h-full overflow-hidden">
-              <div className="relative min-h-[600px] min-w-[450px]">
-                <Image
-                  src={banner}
-                  alt=""
-                  width={450}
-                  height={600}
-                  className="absolute object-contain"
-                />
+              <div className="relative mt-4 h-full w-full">
+                <Image src={banner} alt="" fill className="object-cover" />
               </div>
             </div>
           </div>
           <div className="w-full lg:w-1/2">
-            <div className="flex flex-wrap">
-              {product.slice(0, 6).map((item, index) => (
-                <div key={index} className="w-full p-2 sm:w-1/2 md:w-1/3">
-                  <ProductCard key={item._id} product={item} />
-                </div>
-              ))}
-            </div>
+            {products.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 p-2 md:grid-cols-3">
+                {products.slice(0, 6).map((item: ProductFormData) => (
+                  <ProductCard product={item} key={item._id} />
+                ))}
+              </div>
+            ) : (
+              <p>Không có sản phẩm nào</p>
+            )}
           </div>
         </div>
       </div>

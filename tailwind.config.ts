@@ -75,7 +75,31 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		}
-  	}
+  	},
+	  colors: {
+		DarkSilver: '#737865',
+		LaurelGreen: '#ADB29E',
+		White: '#ffffff',
+		AntiFlashWhite: '#f2f3f0',
+		DarkJungleGreen: '#182226',
+        Pink: '#FFF2F2',
+		EerieBlack: '1d1d1d',
+		JasperOrange: '#E19A4C',
+		Black35: 'rgba(0, 0, 0, 0.35)',
+		Black0: 'rgba(0, 0, 0, 0)',
+		Black40: 'rgba(0, 0, 0, 0.4)',
+		Black60: 'rgba(0, 0, 0, 0.6)',
+		PersianRed: '#CC3333',
+		Charcoal: '#2A435D',
+		Black: '#000000',
+		RaisinBlack: '#252525',
+		LightSilver: '#d9d9d9',
+		Blue: '#4A90E2',
+		BlueNavy: '#50B0E3',
+		Green: '#7ED321',
+		Be: '#D2B8A2',
+		Red: '#D0021B'
+	  },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

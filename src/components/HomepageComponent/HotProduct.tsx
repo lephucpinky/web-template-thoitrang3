@@ -1,14 +1,20 @@
-import { products } from "@/constants/menu"
 import SectionHeader from "../Homepage/SectionHeader"
-
-import { Button } from "../ui/button"
-import ProductCard from "../product/ProductCard"
 import { useEffect, useState } from "react"
 import { ProductFormData } from "@/types/productType"
 import { APIGetProducts } from "@/services/product"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import ProductCard from "../product/ProductCard"
 
-export default function HotProduct() {
-  const [product, setProduct] = useState<ProductFormData[]>([])
+interface ProductCardProps {
+  product: ProductFormData
+  textColor?: string
+}
+
+export default function HotProduct({ product }: ProductCardProps) {
+  const router = useRouter()
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
+  const [products, setProduct] = useState<ProductFormData[]>([])
   const [filterForm, setFilterForm] = useState<any>({
     page: 1,
     limit: 10000,
@@ -28,22 +34,31 @@ export default function HotProduct() {
       console.error(error)
     }
   }
+
   useEffect(() => {
     handleGetProductList()
   })
 
   return (
-    <section className="mx-auto mb-12 max-w-7xl bg-[#FFFAF0] pt-16">
+    <section className="mx-auto mb-12 max-w-7xl pt-16">
       <SectionHeader title="SẢN PHẨM HOT" />
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-        {product.slice(0, 10).map((item, index) => (
-          <ProductCard key={index} product={item} />
-        ))}
-      </div>
+      {products.length > 0 ? (
+        <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 md:grid-cols-5">
+          {products.map((item: ProductFormData) => (
+            <ProductCard product={item} key={item._id} />
+          ))}
+        </div>
+      ) : (
+        <p>Không có sản phẩm nào</p>
+      )}
+
       <div className="mt-6 flex justify-center pb-5">
-        <Button className="bg-[#1C5B41] px-8 font-[Montserrat] text-white hover:bg-[#1C5B41]">
+        <Link
+          href="/san-pham"
+          className="padding-6 rounded-md bg-[#1C5B41] px-8 font-[Montserrat] text-White hover:bg-[#1C5B41]"
+        >
           Xem tất cả
-        </Button>
+        </Link>
       </div>
     </section>
   )

@@ -24,8 +24,8 @@ export default function HeroBanner() {
   }, [])
 
   return (
-    <section className="">
-      <div className="mx-auto h-[200px] overflow-hidden px-4 md:h-[400px] lg:h-[600px]">
+    <section className="px-4">
+      <div className="h-[200px] overflow-hidden md:h-[400px] lg:h-[600px]">
         {banner[0]?.image_url[0] && (
           <Image
             src={baseUrlImage + banner[0]?.image_url[0]}

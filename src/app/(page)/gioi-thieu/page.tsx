@@ -14,6 +14,7 @@ export default function page() {
         <div className="col-span-4">
           <h1 className="mb-4 text-2xl font-bold">Tầm nhìn</h1>
           <span
+            className="font-[Nubito]"
             dangerouslySetInnerHTML={{ __html: aboutUs?.description }}
           ></span>
         </div>

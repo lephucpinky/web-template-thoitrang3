@@ -54,22 +54,22 @@ export default function RootLayout({
   return (
     <main>
       <Header />
-      <div className="container mx-auto hidden items-center justify-between px-4 py-3 lg:flex">
+      <div className="mx-auto hidden items-center justify-between bg-[#F7EDD9] px-4 py-3 lg:flex">
         <div className="flex-1"></div>
 
         {/* Search Bar */}
         <div className="relative max-w-xl flex-1">
           <div className="flex overflow-hidden rounded-3xl border">
-            <div className="border-r-gray-300 bg-white px-3 py-2 text-sm">
+            <div className="border-r-DarkSilver bg-White px-3 py-2 text-sm">
               <span>Tất cả</span>
-              <span className="ml-1 text-gray-500">▼</span>
+              <span className="text-gray-500 ml-1">▼</span>
             </div>
             <input
               type="text"
               placeholder="Tìm sản phẩm bạn mong muốn"
               className="flex-1 px-3 py-2 text-sm outline-none"
             />
-            <button className="bg-orange-500 px-4 py-2 text-white">
+            <button className="bg-White px-4 py-2 text-Black">
               <Search size={18} />
             </button>
           </div>
@@ -77,7 +77,7 @@ export default function RootLayout({
 
         {/* Hotline */}
         <div className="flex flex-1 items-center justify-end">
-          <div className="flex items-center text-green-800">
+          <div className="text-green-800 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="mr-1 h-5 w-5"

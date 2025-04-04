@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux"
 import { setReviews } from "@/store/slices/reviewSlice"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
-import ProductCard from "@/components/product/ProductCard"
+import ProductCard, { ProductCardSmall } from "@/components/product/ProductCard"
 interface Product {
   id: number
   name: string
@@ -132,7 +132,7 @@ export default function ProductPage() {
         selectedOptions[name] === values[0]
       )
       return (
-        <div key={name} className="flex items-center justify-start gap-3">
+        <div key={name} className="my-4 flex items-center justify-start gap-3">
           <h3 className="flex items-center font-medium">{name}:</h3>
           <div className="flex flex-wrap gap-2">
             {values.map((value) => (
@@ -188,7 +188,7 @@ export default function ProductPage() {
           {selectedClassification.classifications.map((c: any) => (
             <span
               key={c.classification_name}
-              className="text-primary hover:bg-gray-500"
+              className="hover:bg-gray-500 text-primary"
             >
               {c.classification_name}: {c.classification_value}{" "}
             </span>
@@ -229,7 +229,7 @@ export default function ProductPage() {
   }, [])
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto bg-White px-4 py-8">
       {/* Breadcrumb */}
       <div className="mb-6 flex items-center gap-2 text-sm">
         <Link href="/" className="hover:underline">
@@ -249,7 +249,7 @@ export default function ProductPage() {
               {product?.images.map((item, i) => (
                 <button
                   key={i}
-                  className={`${imageSelected === item ? "cursor-pointer border hover:border-orange-500" : ""}`}
+                  className={`${imageSelected === item ? "cursor-pointer border hover:border-JasperOrange" : ""}`}
                   onClick={() => setImageSelected(item)}
                 >
                   <Image
@@ -264,19 +264,18 @@ export default function ProductPage() {
             </div>
 
             {/* Main Image */}
-            <div className="relative ml-24">
-              <button className="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/80 p-2 shadow-md">
+            <div className="relative ml-24 h-[500px] w-auto">
+              <button className="absolute left-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-White/80 p-2 shadow-md">
                 <span className="sr-only">Previous</span>
                 &lt;
               </button>
               <Image
                 src={baseUrl + imageSelected}
                 alt="Product main image"
-                width={400}
-                height={500}
-                className="h-[500px] w-full object-contain"
+                fill
+                className="object-contain"
               />
-              <button className="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/80 p-2 shadow-md">
+              <button className="bg-white/80 absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full p-2 shadow-md">
                 <span className="sr-only">Next</span>
                 &gt;
               </button>
@@ -286,12 +285,12 @@ export default function ProductPage() {
 
         {/* Product Details */}
         <div>
-          <h1 className="mb-4 text-2xl font-medium">{product?.product_name}</h1>
+          <h1 className="mb-8 text-2xl font-medium">{product?.product_name}</h1>
           {renderSelectedInfo()}
-          <div className="mt-4">{renderClassifications()}</div>
+          <div className="mb-4">{renderClassifications()}</div>
 
           <div className="mb-6 flex items-center gap-4">
-            <div className="flex border">
+            <div className="my-6 flex border">
               <button className="border-r px-3 py-2">
                 <Minus size={16} />
               </button>
@@ -308,12 +307,12 @@ export default function ProductPage() {
           </div>
 
           <div className="mb-6 flex gap-4">
-            <Button className="rounded bg-orange-500 px-8 py-2 text-white hover:bg-orange-600">
+            <Button className="rounded bg-[#FE9614] px-8 py-2 text-White hover:bg-[#FE9614]/60">
               MUA NGAY
             </Button>
             <Button
               variant="outline"
-              className="rounded border-orange-500 px-4 py-2 text-orange-500 hover:bg-orange-50"
+              className="rounded border-[#FE9614] px-4 py-2 text-[#FE9614] hover:bg-[#FE9614]/50"
             >
               THÊM VÀO GIỎ
             </Button>
@@ -327,16 +326,16 @@ export default function ProductPage() {
       </div>
 
       {/* Service Highlights */}
-      <div className="mt-8 rounded-lg bg-gray-50 p-6">
+      <div className="mt-8 rounded-lg bg-[#F9F9F9] p-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {preview?.map((item: reviewType) => (
             <div className="flex items-center gap-4">
-              <div className="h-[60px] w-[60px] p-3">
+              <div className="relative h-[40px] w-[40px] p-3">
                 <Image
                   src={`${baseUrlImage}${item.avatar}`}
                   alt={item.customerName}
-                  width={66}
-                  height={66}
+                  fill
+                  className="object-cover"
                 />
               </div>
               <div>
@@ -352,10 +351,10 @@ export default function ProductPage() {
       <div className="mt-8">
         <div className="border-b">
           <div className="flex">
-            <button className="border-b-2 border-black px-6 py-3 font-medium">
+            <button className="border-black border-b-2 px-6 py-3 font-medium">
               MÔ TẢ SẢN PHẨM
             </button>
-            <button className="px-6 py-3 text-gray-500">
+            <button className="text-gray-500 px-6 py-3">
               CHÍNH SÁCH ĐỔI HÀNG
             </button>
           </div>
@@ -370,19 +369,9 @@ export default function ProductPage() {
             ></p>
           </ul>
         </div>
-        {baseUrl && product?.images && product?.images.length > 0 && (
-          <div className="flex justify-center">
-            <Image
-              src={baseUrl + imageSelected}
-              alt=""
-              width={800}
-              height={1200}
-              className="w-1/2 object-cover md:w-3/4"
-            />
-          </div>
-        )}
+
         <div className="mt-6 flex justify-center pb-5">
-          <Button className="bg-[#1C5B41] px-8 font-[Montserrat] text-white hover:bg-[#1C5B41]">
+          <Button className="bg-[#1C5B41] px-8 font-[Montserrat] text-White hover:bg-[#1C5B41]">
             Xem thêm
           </Button>
         </div>
@@ -392,9 +381,9 @@ export default function ProductPage() {
         <h2 className="font-playfair mb-8 text-center text-2xl font-semibold">
           Gợi ý cho bạn
         </h2>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {productList.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCardSmall key={product._id} product={product} />
           ))}
         </div>
       </div>

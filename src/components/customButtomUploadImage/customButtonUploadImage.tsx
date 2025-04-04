@@ -1,14 +1,14 @@
-import React, { useRef } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useRef } from "react"
+import { Button } from "@/components/ui/button"
 
 interface CustomButtonUploadImageProps {
-  onImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
-  multiple?: boolean;
-  accept?: string;
-  buttonText?: string;
-  maxFileSize?: number; // in KB
-  maxFiles?: number;
+  onImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void
+  disabled?: boolean
+  multiple?: boolean
+  accept?: string
+  buttonText?: string
+  maxFileSize?: number // in KB
+  maxFiles?: number
 }
 
 const CustomButtonUploadImage: React.FC<CustomButtonUploadImageProps> = ({
@@ -20,53 +20,53 @@ const CustomButtonUploadImage: React.FC<CustomButtonUploadImageProps> = ({
   maxFileSize = 3000, // 1000KB = 1MB
   maxFiles = 10,
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files?.length) return;
+    const files = e.target.files
+    if (!files?.length) return
 
-    console.log("Raw files:", files); // Debug log
+    console.log("Raw files:", files) // Debug log
 
     // Kiểm tra số lượng file
     if (multiple && files.length > maxFiles) {
-      alert(`Chỉ có thể tải lên tối đa ${maxFiles} ảnh một lần`);
-      e.target.value = "";
-      return;
+      alert(`Chỉ có thể tải lên tối đa ${maxFiles} ảnh một lần`)
+      e.target.value = ""
+      return
     }
 
     // Lọc các file hợp lệ
     const validFiles = Array.from(files).filter((file) => {
       if (file.size > maxFileSize * 1024) {
-        console.warn(`File ${file.name} vượt quá ${maxFileSize}KB`);
-        return false;
+        console.warn(`File ${file.name} vượt quá ${maxFileSize}KB`)
+        return false
       }
       if (!file.type.startsWith("image/")) {
-        console.warn(`File ${file.name} không phải là ảnh`);
-        return false;
+        console.warn(`File ${file.name} không phải là ảnh`)
+        return false
       }
-      return true;
-    });
+      return true
+    })
 
     if (validFiles.length === 0) {
-      alert("Không có file hợp lệ để tải lên");
-      e.target.value = "";
-      return;
+      alert("Không có file hợp lệ để tải lên")
+      e.target.value = ""
+      return
     }
 
     // Tạo DataTransfer mới với các file hợp lệ
-    const dataTransfer = new DataTransfer();
-    validFiles.forEach((file) => dataTransfer.items.add(file));
-    e.target.files = dataTransfer.files;
+    const dataTransfer = new DataTransfer()
+    validFiles.forEach((file) => dataTransfer.items.add(file))
+    e.target.files = dataTransfer.files
 
     // Truyền event thay vì chỉ truyền files
-    onImageUpload(e);
-  };
+    onImageUpload(e)
+  }
 
   return (
     <Button
       type="button"
-      className="text-Charcoal flex items-center gap-2 w-fit"
+      className="text-Charcoal flex w-fit items-center gap-2"
       onClick={() => inputRef.current?.click()}
       disabled={disabled}
     >
@@ -96,7 +96,7 @@ const CustomButtonUploadImage: React.FC<CustomButtonUploadImageProps> = ({
       </svg>
       {buttonText}
     </Button>
-  );
-};
+  )
+}
 
-export default CustomButtonUploadImage;
+export default CustomButtonUploadImage
