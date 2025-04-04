@@ -96,23 +96,21 @@ export default function SectionHeader({
       console.error(err)
     }
   }
-
   useEffect(() => {
     handleGetProductList()
   }, [filterForm])
-
   useEffect(() => {
     handleGetCategories()
     handleGetProductList()
   }, [])
 
   return (
-    <div className="mb-4 flex items-center justify-between pl-4">
-      <h2 className="font-[Montserrat] text-lg font-bold uppercase text-[#1C5B41] lg:text-2xl">
+    <div className="flex items-center justify-between space-x-2 pl-4 pr-4">
+      <h2 className="whitespace-nowrap font-[Montserrat] text-lg font-bold text-[#1C5B41] lg:text-2xl">
         {title}
       </h2>
 
-      <div className="relative w-3/4 lg:w-1/3">
+      <div className="relative w-[60%] lg:w-1/3">
         <Carousel
           opts={{
             align: "start",
@@ -129,7 +127,7 @@ export default function SectionHeader({
                 <button
                   className={cn(
                     "w-full whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors",
-                    activeCategory === item._id
+                    selectedCategory === item._id
                       ? "bg-White text-Black"
                       : "bg-White text-Black hover:bg-[#e09000]"
                   )}

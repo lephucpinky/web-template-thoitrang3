@@ -1,17 +1,15 @@
 "use client"
 import HeroBanner from "@/components/banner/Herobanner"
-
 import ProductCard from "@/components/product/ProductCard"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@radix-ui/react-separator"
 import { ChevronDown } from "lucide-react"
 import { APIGetCategories } from "@/services/category"
 import PaginationComponent from "@/components/pagination/paginationProduct"
-import ProductFilter from "@/components/filter/ProductFilter"
+
 interface FilterForm {
   category_id: string | undefined
   page: number
@@ -172,16 +170,16 @@ export default function page() {
   }, [searchProduct])
 
   return (
-    <main className="bg-white mx-auto p-4">
+    <main className="bg-white container mx-auto min-h-screen p-4">
       <HeroBanner />
-      <div className="mt-10 flex flex-col justify-around gap-6 md:flex-row">
-        <div className="w-full md:w-64">
+      <div className="mt-4 flex flex-col justify-between gap-4 md:flex-row">
+        <div className="w-full md:w-1/4">
           <div className="ml-4 w-full max-w-xs space-y-4 font-sans">
             {/* Category Section */}
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setCategoryOpen(!categoryOpen)}
-                className="bg-Pink flex w-full items-center justify-between p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
               >
                 <span>Danh mục</span>
                 <ChevronDown
@@ -189,14 +187,14 @@ export default function page() {
                 />
               </button>
               {categoryOpen && (
-                <div className="bg-white space-y-2 p-3">
+                <div className="space-y-2 bg-White p-3">
                   {categorys.slice(0, 6).map((item) => (
                     <label className="flex cursor-pointer items-center gap-2">
                       <input
                         key={item?._id}
                         type="radio"
                         name="category"
-                        className={`text-Pink h-4 w-4 border-DarkSilver ${selectedCategory === item._id ? "focus:ring-Pink" : ""} `}
+                        className={`h-4 w-4 border-DarkSilver text-Pink ${selectedCategory === item._id ? "focus:ring-Pink" : ""} `}
                         onClick={() => handleSelectCategory(item?._id)}
                       />
                       {item.category_name}
@@ -210,7 +208,7 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setColorOpen(!colorOpen)}
-                className="bg-Pink flex w-full items-center justify-between p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
               >
                 <span>Màu sắc</span>
                 <ChevronDown
@@ -224,7 +222,7 @@ export default function page() {
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Trắng</span>
                     <div className="ml-auto h-5 w-5 border border-DarkSilver bg-White"></div>
@@ -233,7 +231,7 @@ export default function page() {
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Đen</span>
                     <div className="ml-auto h-5 w-5 bg-Black"></div>
@@ -242,34 +240,34 @@ export default function page() {
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Navy</span>
-                    <div className="bg-BlueNavy ml-auto h-5 w-5"></div>
+                    <div className="ml-auto h-5 w-5 bg-BlueNavy"></div>
                   </label>
                   <label className="flex cursor-pointer items-center gap-2">
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Xanh dương</span>
-                    <div className="bg-Blue ml-auto h-5 w-5"></div>
+                    <div className="ml-auto h-5 w-5 bg-Blue"></div>
                   </label>
                   <label className="flex cursor-pointer items-center gap-2">
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Xanh lá</span>
-                    <div className="bg-Green ml-auto h-5 w-5"></div>
+                    <div className="ml-auto h-5 w-5 bg-Green"></div>
                   </label>
                   <label className="flex cursor-pointer items-center gap-2">
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Be</span>
                     <div className="ml-auto h-5 w-5 bg-[#d2b48c]"></div>
@@ -278,10 +276,10 @@ export default function page() {
                     <input
                       type="radio"
                       name="color"
-                      className="text-Pink focus:ring-Pink h-4 w-4 border-DarkSilver"
+                      className="h-4 w-4 border-DarkSilver text-Pink focus:ring-Pink"
                     />
                     <span className="text-sm">Đỏ</span>
-                    <div className="bg-Red ml-auto h-5 w-5"></div>
+                    <div className="ml-auto h-5 w-5 bg-Red"></div>
                   </label>
                 </div>
               )}
@@ -291,7 +289,7 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setPriceOpen(!priceOpen)}
-                className="bg-Pink flex w-full items-center justify-between p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
               >
                 <span>Giá</span>
                 <ChevronDown
@@ -337,7 +335,7 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setSizeOpen(!sizeOpen)}
-                className="bg-Pink flex w-full items-center justify-between p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
               >
                 <span>Size</span>
                 <ChevronDown
@@ -351,22 +349,22 @@ export default function page() {
                     <span className="text-sm">Áo</span>
                   </div>
                   <div className="grid grid-cols-5 gap-2">
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       XS
                     </button>
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       S
                     </button>
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       M
                     </button>
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       L
                     </button>
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       XL
                     </button>
-                    <button className="hover:border-Pink focus:ring-Pink rounded border border-DarkSilver p-1 text-sm focus:outline-none focus:ring-2">
+                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
                       XXL
                     </button>
                   </div>
@@ -375,19 +373,21 @@ export default function page() {
             </div>
           </div>
         </div>
-        {product.length > 0 ? (
-          <div className="-mt-2 grid max-h-[350px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {product.map((item: ProductFormData) => (
-              <ProductCard product={item} key={item._id} />
-            ))}
-          </div>
-        ) : (
-          <div className="flex w-full">
-            <text className="font-dmsans w-full text-center text-[12px] font-normal text-PersianRed md:w-1/3 md:text-[16px] lg:w-1/3 lg:text-[16px]">
-              Hiện chưa có sản phẩm nào!
-            </text>
-          </div>
-        )}
+        <div className="w-full md:w-3/4">
+          {product.length > 0 ? (
+            <div className="-mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+              {product.map((item: ProductFormData) => (
+                <ProductCard product={item} key={item._id} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex w-full">
+              <text className="font-dmsans w-full text-center text-[12px] font-normal text-PersianRed md:w-1/3 md:text-[16px] lg:w-1/3 lg:text-[16px]">
+                Hiện chưa có sản phẩm nào!
+              </text>
+            </div>
+          )}
+        </div>
       </div>
       <div className="mt-8 flex items-center justify-center space-x-2">
         <PaginationComponent

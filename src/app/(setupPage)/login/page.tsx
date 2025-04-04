@@ -133,24 +133,24 @@ const page = () => {
     <div className="flex h-screen w-screen flex-col items-center justify-center bg-[url(/images/bg_login.png)] bg-cover bg-center bg-no-repeat font-sans sm:items-center md:items-center lg:items-end lg:px-8">
       <div className="flex h-2/3 w-5/6 items-center sm:w-5/6 sm:items-center md:w-1/2 md:items-center lg:ml-auto lg:w-1/3">
         {/* Form nằm bên phải */}
-        <div className="bg-White flex w-full flex-col items-center justify-center gap-4 rounded-l-lg bg-opacity-90 p-8 shadow-lg">
+        <div className="flex w-full flex-col items-center justify-center gap-4 rounded-l-lg bg-White bg-opacity-90 p-8 shadow-lg">
           <div className="flex w-full flex-row justify-center gap-4">
             <img src="/images/logo_minvoice.png" alt="Logo" className="h-20" />
             {/* <text className="text-[24px] font-bold text-black ">M-invoice</text> */}
           </div>
           <div>
-            <p className="text-Charcoal text-[24px] font-bold">
+            <p className="text-[24px] font-bold text-Charcoal">
               Hệ thống quản lý
             </p>
           </div>
           <div className="flex w-full flex-col gap-0.5">
             <div className="flex w-full flex-row gap-3">
-              <text className="text-Black text-[20px] font-semibold">
+              <text className="text-[20px] font-semibold text-Black">
                 Xin chào
               </text>
               {/* <img src="/icons/ic_hi.png" className="h-5 w-5" /> */}
             </div>
-            <text className="text-Black text-[10px] font-light italic opacity-30">
+            <text className="text-[10px] font-light italic text-Black opacity-30">
               Vui lòng đăng nhập tại đây!
             </text>
           </div>
@@ -159,7 +159,7 @@ const page = () => {
               name="username"
               type="text"
               placeholder="Tên đăng nhập"
-              className="focus:ring-Charcoal w-full rounded-md border p-3 focus:outline-none focus:ring-2"
+              className="w-full rounded-md border p-3 focus:outline-none focus:ring-2 focus:ring-Charcoal"
               onChange={handleInputChange}
             />
             <div className="relative w-full">
@@ -167,12 +167,12 @@ const page = () => {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Mật khẩu"
-                className="focus:ring-Charcoal w-full rounded-md border p-3 focus:outline-none focus:ring-2"
+                className="w-full rounded-md border p-3 focus:outline-none focus:ring-2 focus:ring-Charcoal"
                 onChange={handleInputChange}
               />
               <button
                 type="button"
-                className="absolute inset-y-0 right-3 flex w-5 items-center text-gray-600 hover:text-gray-800"
+                className="text-gray-600 hover:text-gray-800 absolute inset-y-0 right-3 flex w-5 items-center"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -183,7 +183,7 @@ const page = () => {
               </button>
             </div>
             <Button
-              className="bg-Charcoal text-White hover:bg-Charcoal hover:shadow-DarkSilver w-full rounded-md p-2 font-sans font-bold hover:shadow-md"
+              className="w-full rounded-md bg-Charcoal p-2 font-sans font-bold text-White hover:bg-Charcoal hover:shadow-md hover:shadow-DarkSilver"
               onClick={() => handleLogin(formData.username, formData.password)}
             >
               {isLoading ? <Loading /> : "Đăng nhập"}

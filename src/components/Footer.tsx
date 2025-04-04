@@ -7,7 +7,7 @@ import logo from "../assets/images/Template Alena.png"
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#AEAEAE] font-[Montserrat] text-White">
+    <footer className="bg-[#AEAEAE] font-[Montserrat] text-White">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: Logo and Contact Info */}
@@ -223,11 +223,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Decorative element */}
-      <div className="absolute bottom-0 right-0 h-32 w-1/3 overflow-hidden">
-        <div className="absolute bottom-0 right-0 h-full w-full bg-[url('/placeholder.svg?height=200&width=400')] bg-cover bg-right-bottom opacity-30"></div>
       </div>
     </footer>
   )

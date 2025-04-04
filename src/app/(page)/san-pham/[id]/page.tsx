@@ -222,7 +222,9 @@ export default function ProductPage() {
       console.error(err)
     }
   }
-
+  useEffect(() => {
+    handleGetProductList()
+  }, [filterForm])
   useEffect(() => {
     handleGetProductList()
     handleGetPreviewList()

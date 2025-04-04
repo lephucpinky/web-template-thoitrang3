@@ -43,11 +43,14 @@ export default function PriceGoodProduct({ product }: ProductCardProps) {
   }
   useEffect(() => {
     handleGetProductList()
-  })
+  }, [])
   return (
-    <section className="mb-4 bg-[#FFFAF0] pt-16 font-[Montserrat]">
-      <div className="mx-auto max-w-7xl px-4">
-        <SectionHeader title="SẢN PHẨM GIÁ TỐT" />
+    <section className="bg-[#FFFAF0] pt-6 font-[Montserrat]">
+      <div className="mx-auto max-w-7xl">
+        <div className="pr-4">
+          <SectionHeader title=" GIÁ TỐT" />
+        </div>
+
         <div className="flex flex-col gap-4 lg:flex-row">
           <div className="w-full lg:w-1/2">
             <div className="h-full overflow-hidden">

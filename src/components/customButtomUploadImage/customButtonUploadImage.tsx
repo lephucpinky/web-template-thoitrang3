@@ -66,7 +66,7 @@ const CustomButtonUploadImage: React.FC<CustomButtonUploadImageProps> = ({
   return (
     <Button
       type="button"
-      className="text-Charcoal flex w-fit items-center gap-2"
+      className="flex w-fit items-center gap-2 text-White"
       onClick={() => inputRef.current?.click()}
       disabled={disabled}
     >

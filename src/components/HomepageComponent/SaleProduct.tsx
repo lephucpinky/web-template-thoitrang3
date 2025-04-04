@@ -40,7 +40,7 @@ export default function SaleProduct({ product }: ProductCardProps) {
 
   useEffect(() => {
     handleGetProductList()
-  })
+  }, [])
   return (
     <section className="bg-[#1c5b27] py-6 font-[Montserrat]">
       <div className="mx-auto max-w-7xl px-4">
@@ -54,7 +54,7 @@ export default function SaleProduct({ product }: ProductCardProps) {
             <Image
               src={collection}
               alt="/"
-              width={1000}
+              width={900}
               height={200}
               className="bg-yellow-400 h-auto w-full rounded-lg"
             />

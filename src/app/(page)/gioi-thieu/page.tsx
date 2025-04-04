@@ -9,12 +9,12 @@ export default function page() {
   console.log("🚀 ~ AboutUs ~ aboutUs:", aboutUs)
   return (
     <section className="container mx-auto min-h-screen">
-      <h2 className="text-center text-2xl">Về chúng tôi</h2>
-      <div className="grid grid-cols-5 items-center">
+      <h2 className="text-center text-2xl font-bold">Về chúng tôi</h2>
+      <div className="flex items-center">
         <div className="col-span-4">
           <h1 className="mb-4 text-2xl font-bold">Tầm nhìn</h1>
           <span
-            className="font-[Nubito]"
+            className="text-center font-[Nubito]"
             dangerouslySetInnerHTML={{ __html: aboutUs?.description }}
           ></span>
         </div>

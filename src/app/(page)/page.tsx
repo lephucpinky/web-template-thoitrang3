@@ -25,11 +25,11 @@ export default function Home() {
         <TopNavigation />
         <div className="w-full">
           <div className="bg-[#FFFAF0]">
-            <HotProduct />
+            <HotProduct product={undefined} />
           </div>
-          <NewProduct />
-          <SaleProduct />
-          <PriceGoodProduct />
+          <NewProduct product={undefined} />
+          <SaleProduct product={undefined} />
+          <PriceGoodProduct product={undefined} />
         </div>
       </main>
     </>

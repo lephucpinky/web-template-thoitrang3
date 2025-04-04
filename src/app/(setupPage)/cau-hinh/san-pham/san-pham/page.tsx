@@ -392,9 +392,9 @@ const Page = () => {
   }, [isDeleteProduct])
 
   return (
-    <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
+    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
-        <p className="font-sans text-[20px] font-medium text-black">
+        <p className="text-black font-sans text-[20px] font-medium">
           Danh sách sản phẩm
         </p>
         <TooltipProvider>
@@ -411,7 +411,7 @@ const Page = () => {
               />
             </TooltipTrigger>
             <TooltipContent>
-              <p className="bg-Charcoal text-White rounded-md p-2 shadow-sm">
+              <p className="rounded-md bg-Charcoal p-2 text-White shadow-sm">
                 Thêm mới
               </p>
             </TooltipContent>
@@ -436,9 +436,9 @@ const Page = () => {
         />
       </div>
 
-      <div className="border-LightSilver mt-6 rounded-md border p-4">
+      <div className="mt-6 rounded-md border border-LightSilver p-4">
         <div className="mb-4 flex flex-col gap-4">
-          <p className="text-Charcoal font-sans text-[20px] font-medium text-black">
+          <p className="text-black font-sans text-[20px] font-medium text-Charcoal">
             Thông tin sản phẩm
           </p>
         </div>
@@ -569,14 +569,14 @@ const Page = () => {
 
           {/* Phần classification */}
           <div className="mt-4">
-            <Label className="text-Charcoal text-[16px] font-semibold">
+            <Label className="text-[16px] font-semibold text-Charcoal">
               Phân loại sản phẩm
             </Label>
             <div className="mt-2 flex flex-col gap-4">
               {fields.map((field, index) => (
                 <div
                   key={field.id}
-                  className="border-LightSilver flex flex-col gap-4 rounded-md border p-4"
+                  className="flex flex-col gap-4 rounded-md border border-LightSilver p-4"
                 >
                   {/* Classification Items */}
                   <div className="grid grid-cols-2 gap-4">
@@ -626,7 +626,7 @@ const Page = () => {
                                       newValue.splice(itemIndex, 1)
                                       field.onChange(newValue)
                                     }}
-                                    className="border-LightSilver rounded-md border"
+                                    className="rounded-md border border-LightSilver"
                                   >
                                     Xóa
                                   </Button>
@@ -665,29 +665,6 @@ const Page = () => {
                       control={control}
                       render={({ field }) => (
                         <div className="flex flex-col gap-2">
-                          {/* <Button
-                            type="button"
-                            variant="outline"
-                            onClick={() => {
-                              const input = document.createElement("input");
-                              input.type = "file";
-                              input.onchange = (e: any) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                  const reader = new FileReader();
-                                  reader.onloadend = () => {
-                                    field.onChange(reader.result);
-                                  };
-                                  reader.readAsDataURL(file);
-                                }
-                              };
-                              input.click();
-                            }}
-                            className="w-fit border border-LightSilver"
-                            disabled={able}
-                          >
-                            Thêm ảnh
-                          </Button> */}
                           <CustomButtonUploadImage
                             onImageUpload={() => {
                               const input = document.createElement("input")
@@ -721,7 +698,7 @@ const Page = () => {
                               {!able && (
                                 <button
                                   type="button"
-                                  className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                                  className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                                   onClick={() => {
                                     const currentImagesDelete =
                                       getValues("images_delete") || []
@@ -782,7 +759,7 @@ const Page = () => {
                       type="button"
                       variant="default"
                       onClick={() => remove(index)}
-                      className="bg-PersianRed text-White w-fit"
+                      className="w-fit bg-PersianRed text-White"
                     >
                       Xóa phân loại
                     </Button>
@@ -839,7 +816,7 @@ const Page = () => {
               />
             )}
             {errors.images && (
-              <p className="text-sm text-red-500">{errors.images.message}</p>
+              <p className="text-red-500 text-sm">{errors.images.message}</p>
             )}
             <div className="flex flex-wrap gap-2">
               {imageList?.map((image: string, index) => (
@@ -856,7 +833,7 @@ const Page = () => {
                   {!able && (
                     <button
                       type="button"
-                      className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                      className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                       onClick={() => handleRemoveImage(index)}
                     >
                       ×

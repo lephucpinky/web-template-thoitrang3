@@ -38,7 +38,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-1 py-2 text-sm font-medium ${
+                  className={`relative whitespace-pre px-1 py-2 text-sm font-medium ${
                     pathname === item.href
                       ? "text-White"
                       : "text-gray-200 hover:text-White"
@@ -58,10 +58,11 @@ export default function Header() {
         </div>
 
         {/* Mobile layout */}
-        <div className="flex h-16 items-center justify-between md:hidden">
+        <div className="ml-4 flex h-16 items-center justify-between md:hidden">
           <Link href="/" className="flex items-center">
-            <span className="font-serif text-3xl text-White">A</span>
-            <span className="font-serif text-3xl text-[#f39c12]">lena</span>
+            <Link href="/" className="w-auto">
+              <Image src={logo} alt="" width={153} height={47} />
+            </Link>
           </Link>
 
           <button

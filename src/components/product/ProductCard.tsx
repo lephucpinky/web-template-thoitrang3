@@ -16,7 +16,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [liked, setLiked] = useState(false)
   const params = useParams()
-  console.log("🚀 ~ ProductCard ~ product:", product)
+
   const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   const router = useRouter()
 
@@ -29,12 +29,12 @@ export default function ProductCard({
   return (
     <div className="rounded-md">
       <CardContent className="p-2">
-        <div className="relative h-[250px] w-full overflow-hidden">
+        <div className="relative min-h-[350px] w-full overflow-hidden">
           <Image
             src={(baseUrlImage + product?.images[0]) as string}
             alt={product?.product_name}
             fill
-            className="object-cover transition-transform hover:scale-105"
+            className="transition-transform hover:scale-105 md:object-cover"
           />
         </div>
       </CardContent>

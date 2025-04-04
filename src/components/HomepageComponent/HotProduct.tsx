@@ -37,10 +37,10 @@ export default function HotProduct({ product }: ProductCardProps) {
 
   useEffect(() => {
     handleGetProductList()
-  })
+  }, [])
 
   return (
-    <section className="mx-auto mb-12 max-w-7xl pt-16">
+    <section className="mx-auto mb-12 max-w-7xl pt-6">
       <SectionHeader title="SẢN PHẨM HOT" />
       {products.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 md:grid-cols-5">
@@ -52,7 +52,7 @@ export default function HotProduct({ product }: ProductCardProps) {
         <p>Không có sản phẩm nào</p>
       )}
 
-      <div className="mt-6 flex justify-center pb-5">
+      <div className="flex justify-center pb-5">
         <Link
           href="/san-pham"
           className="padding-6 rounded-md bg-[#1C5B41] px-8 font-[Montserrat] text-White hover:bg-[#1C5B41]"

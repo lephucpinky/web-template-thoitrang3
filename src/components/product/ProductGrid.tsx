@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 export default function ProductGrid({ product }: ProductCardProps) {
   const params = useParams()
-  console.log("🚀 ~ ProductCard ~ product:", product)
+
   const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   const router = useRouter()
 

@@ -38,9 +38,9 @@ export default function NewProduct({ product }: ProductCardProps) {
 
   useEffect(() => {
     handleGetProductList()
-  })
+  }, [])
   return (
-    <section className="mb-4 bg-White pt-16 font-[Montserrat]">
+    <section className="mb-4 bg-White pt-6 font-[Montserrat]">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeader title="HÀNG MỚI VỀ" />
         <div className="flex flex-col lg:flex-row">
