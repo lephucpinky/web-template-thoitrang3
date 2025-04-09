@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react"
 import SectionHeader from "../Homepage/SectionHeader"
-
-import { Button } from "../ui/button"
 import Image from "next/image"
 import banner from "../../assets/images/Link (4).png"
-import { Card, CardContent, CardFooter } from "../ui/card"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
 import ProductCard from "../product/ProductCard"
-import ProductGrid from "../product/ProductGrid"
-import { Products } from "@/constants/menu"
 import { useRouter } from "next/navigation"
-import { colorConfig } from "../config/InputConfig"
+
 interface ProductCardProps {
   product: ProductFormData
   textColor?: string
@@ -45,7 +40,7 @@ export default function PriceGoodProduct({ product }: ProductCardProps) {
     handleGetProductList()
   }, [])
   return (
-    <section className="bg-[#FFFAF0] pt-6 font-[Montserrat]">
+    <section className="bg-[#FFFAF0] py-6 font-[Montserrat]">
       <div className="mx-auto max-w-7xl">
         <div className="pr-4">
           <SectionHeader title=" GIÁ TỐT" />

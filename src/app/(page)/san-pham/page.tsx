@@ -9,6 +9,13 @@ import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import { APIGetCategories } from "@/services/category"
 import PaginationComponent from "@/components/pagination/paginationProduct"
+import Link from "next/link"
+import Image from "next/image"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import { useDispatch } from "react-redux"
+import { APIGetBanners } from "@/services/banner"
+import { setBanner } from "@/store/slices/bannerSlice"
 
 interface FilterForm {
   category_id: string | undefined
@@ -21,9 +28,10 @@ interface FilterForm {
 }
 
 export default function page() {
+  const banner = useSelector((state: RootState) => state.banner.banner)
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   const [colorOpen, setColorOpen] = useState(true)
   const [priceOpen, setPriceOpen] = useState(true)
-  const [sizeOpen, setSizeOpen] = useState(true)
   const [categoryOpen, setCategoryOpen] = useState(true)
   const router = useRouter()
   const [categorys, setCategorys] = useState<
@@ -35,13 +43,12 @@ export default function page() {
   const category_id = searchParams.get("category_id")
   const [totalItems, setTotalItems] = useState(0)
   const pathName = usePathname()
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    category_id || "all"
-  )
+  const dispatch = useDispatch()
+  const [selectedCategory, setSelectedCategory] = useState<string>("all")
   // Main filter state that triggers API calls
   const [filterForm, setFilterForm] = useState<FilterForm>({
     page: 1,
-    limit: 12,
+    limit: 10,
     category_id: category_id || undefined,
     price_from: undefined,
     price_to: undefined,
@@ -51,7 +58,7 @@ export default function page() {
   // Temporary filter state for UI changes
   const [tempFilter, setTempFilter] = useState<FilterForm>({
     page: 1,
-    limit: 12,
+    limit: 10,
     category_id: category_id || undefined,
     price_from: undefined,
     price_to: undefined,
@@ -67,6 +74,7 @@ export default function page() {
           category_name: item.category_id?.category_name,
         }))
         setProduct(data)
+        setTotalItems(response?.total)
       }
     } catch (error) {
       console.error(error)
@@ -90,7 +98,17 @@ export default function page() {
       console.error(err)
     }
   }
-
+  const handleGetBanner = async () => {
+    try {
+      const response = await APIGetBanners({ display_page: "home" })
+      if (response?.status === 200) {
+        dispatch(setBanner(response?.data))
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  // Handle confirm button click
   const handleConfirmFilter = () => {
     setFilterForm({
       ...tempFilter,
@@ -104,6 +122,7 @@ export default function page() {
     params.set("page", "1") // Reset page trong URL
     router.push(`?${params.toString()}`, { scroll: false })
   }
+
   useEffect(() => {
     if (searchProduct) {
       setFilterForm((prev) => ({ ...prev, search: searchProduct }))
@@ -118,6 +137,7 @@ export default function page() {
   useEffect(() => {
     handleGetCategories()
     handleGetProductList()
+    handleGetBanner()
   }, [])
 
   const handleSelectCategory = (id: string) => {
@@ -152,7 +172,6 @@ export default function page() {
     params.set("page", page.toString())
     router.push(`?${params.toString()}`, { scroll: false })
   }
-  // Handle confirm button click
 
   useEffect(() => {
     if (searchProduct) {
@@ -169,9 +188,36 @@ export default function page() {
     }
   }, [searchProduct])
 
+  useEffect(() => {
+    const isDesktop = window.innerWidth >= 768
+    setCategoryOpen(isDesktop)
+    setColorOpen(isDesktop)
+    setPriceOpen(isDesktop)
+  }, [])
   return (
     <main className="bg-white container mx-auto min-h-screen p-4">
-      <HeroBanner />
+      {/* Breadcrumb */}
+      <div className="mb-6 flex items-center gap-2 text-sm">
+        <Link href="/" className="hover:underline">
+          Trang chủ
+        </Link>
+        <span>/</span>
+        <Link href="/san-pham" className="hover:underline">
+          Sản phẩm
+        </Link>
+      </div>
+      <div className="h-[200px] overflow-hidden md:h-[400px] lg:h-[600px]">
+        {banner[0]?.image_url[1] && (
+          <Image
+            src={baseUrlImage + banner[0]?.image_url[2]}
+            alt="Model wearing gray jacket"
+            width={1500}
+            height={800}
+            className="object-cover"
+            priority
+          />
+        )}
+      </div>
       <div className="mt-4 flex flex-col justify-between gap-4 md:flex-row">
         <div className="w-full md:w-1/4">
           <div className="ml-4 w-full max-w-xs space-y-4 font-sans">
@@ -179,7 +225,7 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setCategoryOpen(!categoryOpen)}
-                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-Black"
               >
                 <span>Danh mục</span>
                 <ChevronDown
@@ -188,8 +234,11 @@ export default function page() {
               </button>
               {categoryOpen && (
                 <div className="space-y-2 bg-White p-3">
-                  {categorys.slice(0, 6).map((item) => (
-                    <label className="flex cursor-pointer items-center gap-2">
+                  {categorys.slice(0, 6).map((item, product) => (
+                    <label
+                      key={product}
+                      className="flex cursor-pointer items-center gap-2"
+                    >
                       <input
                         key={item?._id}
                         type="radio"
@@ -208,7 +257,7 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setColorOpen(!colorOpen)}
-                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-Black"
               >
                 <span>Màu sắc</span>
                 <ChevronDown
@@ -289,14 +338,13 @@ export default function page() {
             <div className="overflow-hidden rounded-md">
               <button
                 onClick={() => setPriceOpen(!priceOpen)}
-                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
+                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-Black"
               >
                 <span>Giá</span>
                 <ChevronDown
                   className={`h-5 w-5 transition-transform ${priceOpen ? "rotate-180" : ""}`}
                 />
               </button>
-
               {priceOpen && (
                 <div className="bg-white space-y-4 p-3">
                   <div className="flex flex-col gap-6 md:flex-row md:gap-2">
@@ -328,50 +376,9 @@ export default function page() {
                     </Button>
                   </div>
                 </div>
-              )}
+              )}{" "}
             </div>
-
-            {/* Size Section */}
-            <div className="overflow-hidden rounded-md">
-              <button
-                onClick={() => setSizeOpen(!sizeOpen)}
-                className="flex w-full items-center justify-between bg-Pink p-3 font-medium text-DarkSilver"
-              >
-                <span>Size</span>
-                <ChevronDown
-                  className={`h-5 w-5 transition-transform ${sizeOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-
-              {sizeOpen && (
-                <div className="bg-white p-3">
-                  <div className="mb-2">
-                    <span className="text-sm">Áo</span>
-                  </div>
-                  <div className="grid grid-cols-5 gap-2">
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      XS
-                    </button>
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      S
-                    </button>
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      M
-                    </button>
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      L
-                    </button>
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      XL
-                    </button>
-                    <button className="rounded border border-DarkSilver p-1 text-sm hover:border-Pink focus:outline-none focus:ring-2 focus:ring-Pink">
-                      XXL
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          </div>{" "}
         </div>
         <div className="w-full md:w-3/4">
           {product.length > 0 ? (
@@ -382,19 +389,21 @@ export default function page() {
             </div>
           ) : (
             <div className="flex w-full">
-              <text className="font-dmsans w-full text-center text-[12px] font-normal text-PersianRed md:w-1/3 md:text-[16px] lg:w-1/3 lg:text-[16px]">
+              <span className="font-dmsans w-full text-center text-[12px] font-normal text-PersianRed md:w-1/3 md:text-[16px] lg:w-1/3 lg:text-[16px]">
                 Hiện chưa có sản phẩm nào!
-              </text>
+              </span>
             </div>
           )}
         </div>
       </div>
       <div className="mt-8 flex items-center justify-center space-x-2">
-        <PaginationComponent
-          totalItems={totalItems}
-          itemsPerPage={filterForm.limit}
-          handlePageChange={handlePageChange}
-        />
+        {totalItems > 0 && (
+          <PaginationComponent
+            totalItems={totalItems}
+            itemsPerPage={filterForm.limit}
+            handlePageChange={handlePageChange}
+          />
+        )}
       </div>
     </main>
   )

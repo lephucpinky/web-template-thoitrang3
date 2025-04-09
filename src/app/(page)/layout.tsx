@@ -11,6 +11,8 @@ import { useEffect } from "react"
 import { APIGetAboutUs } from "@/services/aboutUs"
 import { setAboutUs } from "@/store/slices/aboutUsSlice"
 import { Search } from "lucide-react"
+import phone from "../../assets/icons/SVG.png"
+import Image from "next/image"
 
 export default function RootLayout({
   children,
@@ -60,39 +62,29 @@ export default function RootLayout({
         {/* Search Bar */}
         <div className="relative max-w-xl flex-1">
           <div className="flex overflow-hidden rounded-3xl border">
-            <div className="border-r-DarkSilver bg-White px-3 py-2 text-sm">
+            <div className="border-r-DarkSilver/ bg-White px-3 py-2 text-sm">
               <span>Tất cả</span>
-              <span className="text-gray-500 ml-1">▼</span>
+              <span className="ml-1 text-DarkSilver/50">▼</span>
             </div>
             <input
               type="text"
               placeholder="Tìm sản phẩm bạn mong muốn"
               className="flex-1 px-3 py-2 text-sm outline-none"
             />
-            <button className="bg-White px-4 py-2 text-Black">
-              <Search size={18} />
+            <button className="bg-[#FE9614] px-4 py-2 text-Black">
+              <Search size={18} color="White" fontWeight={700} />
             </button>
           </div>
         </div>
 
         {/* Hotline */}
         <div className="flex flex-1 items-center justify-end">
-          <div className="text-green-800 flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-1 h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-            <span className="font-medium">{aboutUs.phone}</span>
+          <div className="flex items-center gap-2 border-l-2 border-l-[#1C5B41] pl-6">
+            <Image src={phone} alt="#" width={20} height={20} />
+
+            <span className="font-medium text-[#1C5B41]">
+              Hotline: {aboutUs.phone}
+            </span>
           </div>
         </div>
       </div>

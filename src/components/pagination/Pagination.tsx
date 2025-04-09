@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const pathName = usePathname()
 
   const handleChangePage = (page: number) => {
-    if (page > 1 || page > maxPage) return
+    if (page < 1 || page > maxPage) return
     router.push(`${pathName}?page=${page}&&limit=${itemPerPage}`)
     setCurrentPage(page)
   }
@@ -78,7 +78,7 @@ const Pagination: React.FC<PaginationProps> = ({
             onClick={() => handleChangePage(page)}
             key={index}
             className={`${
-              currentPage === page ? "border-Charcoal border" : "bg-White"
+              currentPage === page ? "border border-Charcoal" : "bg-White"
             } flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md p-1`}
           >
             <p

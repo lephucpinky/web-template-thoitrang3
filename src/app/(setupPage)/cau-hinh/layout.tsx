@@ -96,8 +96,8 @@ export default function ConfigLayout({
         <AppSidebar />
 
         <SidebarInset className="bg-White">
-          <div className="bg-White relative">
-            <header className="bg-White sticky top-0 z-50 flex h-16 w-full shrink-0 items-center gap-2 ease-linear">
+          <div className="relative bg-White">
+            <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center gap-2 bg-White ease-linear">
               <div className="flex w-full items-center gap-2 px-4">
                 <SidebarTrigger className="" />
 
@@ -105,15 +105,15 @@ export default function ConfigLayout({
                       orientation="vertical"
                       className="mr-2 h-4 bg-PersianRed"
                     /> */}
-                <text className="bg-White text-PersianRed z-50 w-full text-center font-sans text-[16px] font-bold md:text-[18px] lg:text-[20px]">
+                <span className="z-50 w-full bg-White text-center font-sans text-[16px] font-bold text-PersianRed md:text-[18px] lg:text-[20px]">
                   CẤU HÌNH TRANG WEB
-                </text>
+                </span>
               </div>
             </header>
 
             <hr />
 
-            <div className="bg-White h-full w-full p-3">{children}</div>
+            <div className="h-full w-full bg-White p-3">{children}</div>
           </div>
         </SidebarInset>
       </SidebarProvider>

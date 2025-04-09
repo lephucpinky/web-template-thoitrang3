@@ -31,7 +31,11 @@ export default function ProductCard({
       <CardContent className="p-2">
         <div className="relative min-h-[350px] w-full overflow-hidden">
           <Image
-            src={(baseUrlImage + product?.images[0]) as string}
+            src={
+              baseUrlImage && product?.images?.[0]
+                ? `${baseUrlImage.replace(/\/$/, "")}/${product.images[0].replace(/^\//, "")}`
+                : "/placeholder.jpg"
+            }
             alt={product?.product_name}
             fill
             className="transition-transform hover:scale-105 md:object-cover"
@@ -68,7 +72,11 @@ export function ProductCardSmall({ product }: ProductCardProps) {
     <div key={product._id} className="group">
       <div className="relative mb-2 h-[400px] w-auto overflow-hidden rounded-lg">
         <Image
-          src={(baseUrlImage + product?.images[0]) as string}
+          src={
+            baseUrlImage && product?.images?.[0]
+              ? `${baseUrlImage.replace(/\/$/, "")}/${product.images[0].replace(/^\//, "")}`
+              : "/placeholder.jpg"
+          }
           alt={product.product_name}
           fill
           className="aspect-square object-cover transition-transform group-hover:scale-105"

@@ -9,7 +9,7 @@ import { useRouter, usePathname } from "next/navigation"
 // Danh sách các trang
 const pages = [
   { key: "ly-do-lua-chon", label: "Lý do lựa chọn" },
-  { key: "cam-ket", label: "Cam kết" },
+  { key: "dich-vu", label: "Dịch vụ" },
 ]
 
 export default function ConfigLayout({
@@ -32,7 +32,7 @@ export default function ConfigLayout({
   }
 
   return (
-    <div className="w-full rounded-b-sm bg-white p-4">
+    <div className="bg-white w-full rounded-b-sm p-4">
       {/* Navigation Buttons */}
       <div className="mb-6 flex">
         {pages.map((page) => (
@@ -41,8 +41,8 @@ export default function ConfigLayout({
             onClick={() => handlePageChange(page.key)}
             className={`w-32 shadow-none hover:shadow-sm ${
               activePage === page.key
-                ? "hover:shadow-DarkJungleGreen bg-Charcoal text-White hover:bg-Charcoal font-bold hover:shadow-md"
-                : "hover:shadow-DarkJungleGreen bg-White text-Black hover:bg-White hover:shadow-md"
+                ? "bg-Charcoal font-bold text-White hover:bg-Charcoal hover:shadow-md hover:shadow-DarkJungleGreen"
+                : "bg-White text-Black hover:bg-White hover:shadow-md hover:shadow-DarkJungleGreen"
             }`}
           >
             {page.label}

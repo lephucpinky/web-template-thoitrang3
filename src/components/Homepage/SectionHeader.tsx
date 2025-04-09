@@ -71,16 +71,6 @@ export default function SectionHeader({
     }
   }
 
-  const handleSelectCategory = (id: string) => {
-    setSelectedCategory(id)
-    setFilterForm((prev) => ({
-      ...prev,
-      category_id: id === "all" ? undefined : id,
-    }))
-
-    router.push(`${pathName}?category_id=${id}`, { scroll: false })
-  }
-
   const handleGetCategories = async () => {
     try {
       const response = await APIGetCategories()
@@ -133,7 +123,6 @@ export default function SectionHeader({
                   )}
                   onClick={() => {
                     setActiveCategory(item._id)
-                    handleSelectCategory(item._id)
                   }}
                 >
                   {item.category_name}

@@ -32,7 +32,7 @@ export interface ProductFormData {
 export interface CategoryInfo {
   _id: string;
   category_name: string;
-  category_image: string;
+  category_image: string[];
   description: string;
   customer: string;
   createdAt: string;

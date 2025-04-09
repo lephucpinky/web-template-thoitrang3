@@ -248,9 +248,9 @@ const Page = () => {
   }, [mode])
 
   return (
-    <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
+    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
-        <p className="font-sans text-[20px] font-medium text-black">
+        <p className="text-black font-sans text-[20px] font-medium">
           Thông tin danh mục
         </p>
         <TooltipProvider>
@@ -266,9 +266,9 @@ const Page = () => {
               />{" "}
             </TooltipTrigger>
             <TooltipContent>
-              <text className="bg-Charcoal text-White rounded-md p-2 shadow-sm">
+              <span className="rounded-md bg-Charcoal p-2 text-White shadow-sm">
                 Thêm mới
-              </text>
+              </span>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -283,11 +283,11 @@ const Page = () => {
       <div className="h-full w-full gap-3 p-3">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row items-center gap-3">
-            <text className="text-PersianRed font-sans text-[12px] font-bold md:text-[16px] lg:text-[20px]">
+            <span className="font-sans text-[12px] font-bold text-PersianRed md:text-[16px] lg:text-[20px]">
               Danh mục sản phẩm
-            </text>
+            </span>
           </div>
-          <div className="h-full w-full gap-3 rounded-lg bg-white p-3">
+          <div className="bg-white h-full w-full gap-3 rounded-lg p-3">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
@@ -319,25 +319,19 @@ const Page = () => {
                   )}
                 />
                 <div
-                  className={`text-Charcoal col-span-1 grid w-full gap-1.5 font-sans font-normal md:col-span-2`}
+                  className={`col-span-1 grid w-full gap-1.5 font-sans font-normal text-Charcoal md:col-span-2`}
                 >
                   {" "}
-                  <Label className="text-Charcoal mb-2 block font-sans font-normal">{`Hình ảnh nền`}</Label>
+                  <Label className="mb-2 block font-sans font-normal text-Charcoal">{`Hình ảnh nền`}</Label>
                   {}
                   {(mode === "edit" || mode === "create") && (
-                    // <input
-                    //   type="file"
-                    //   onChange={handleImageUpload}
-                    //   className="mb-2"
-                    //   disabled={able}
-                    // />
                     <CustomButtonUploadImage
                       onImageUpload={handleImageUpload}
                       disabled={able}
                     />
                   )}
                   {errors.category_image && (
-                    <p className="text-PersianRed font-sans text-[12px] font-normal">
+                    <p className="font-sans text-[12px] font-normal text-PersianRed">
                       {errors.category_image?.message}
                     </p>
                   )}
@@ -357,7 +351,7 @@ const Page = () => {
                         {(mode === "edit" || mode === "create") && (
                           <button
                             type="button"
-                            className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                            className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                             onClick={() => {
                               handleRemoveImage(imageList)
                             }}
@@ -375,7 +369,7 @@ const Page = () => {
                 <div className="flex flex-row gap-4">
                   <Button
                     type="submit"
-                    className="bg-Charcoal text-White hover:bg-DarkJungleGreen w-fit p-2 px-8 hover:shadow-sm"
+                    className="w-fit bg-Charcoal p-2 px-8 text-White hover:bg-DarkJungleGreen hover:shadow-sm"
                   >
                     Cập nhật
                   </Button>
@@ -388,7 +382,7 @@ const Page = () => {
                     setAble(false)
                     handleSetMode("edit")
                   }}
-                  className="bg-Charcoal text-White hover:bg-DarkJungleGreen w-fit p-2 px-8 hover:shadow-sm"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White hover:bg-DarkJungleGreen hover:shadow-sm"
                 >
                   Chỉnh sửa
                 </Button>
@@ -396,7 +390,7 @@ const Page = () => {
               {mode === "create" && (
                 <Button
                   type="submit"
-                  className="bg-Charcoal text-White hover:bg-DarkJungleGreen w-fit p-2 px-8 hover:shadow-sm"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White hover:bg-DarkJungleGreen hover:shadow-sm"
                 >
                   Thêm mới
                 </Button>

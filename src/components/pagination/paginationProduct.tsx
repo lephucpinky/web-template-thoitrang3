@@ -25,7 +25,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
   const currentPage = Number(searchParams.get("page")) || 1
   const totalPages = Math.ceil(totalItems / itemsPerPage)
 
-  // Nếu chỉ có 1 trang thì không cần hiển thị pagination
+  // // Nếu chỉ có 1 trang thì không cần hiển thị pagination
   // if (totalPages <= 1) return null
 
   return (

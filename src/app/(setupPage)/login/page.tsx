@@ -145,14 +145,14 @@ const page = () => {
           </div>
           <div className="flex w-full flex-col gap-0.5">
             <div className="flex w-full flex-row gap-3">
-              <text className="text-[20px] font-semibold text-Black">
+              <span className="text-[20px] font-semibold text-Black">
                 Xin chào
-              </text>
+              </span>
               {/* <img src="/icons/ic_hi.png" className="h-5 w-5" /> */}
             </div>
-            <text className="text-[10px] font-light italic text-Black opacity-30">
+            <span className="text-[10px] font-light italic text-Black opacity-30">
               Vui lòng đăng nhập tại đây!
-            </text>
+            </span>
           </div>
           <div className="w-full space-y-4">
             <Input

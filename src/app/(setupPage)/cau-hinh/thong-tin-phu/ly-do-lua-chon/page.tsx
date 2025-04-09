@@ -265,9 +265,9 @@ const Page = () => {
   }
 
   return (
-    <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
+    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
-        <p className="font-sans text-[20px] font-medium text-black">
+        <p className="text-black font-sans text-[20px] font-medium">
           Thông tin lý do lựa chọn
         </p>
         <TooltipProvider>
@@ -285,9 +285,9 @@ const Page = () => {
               />{" "}
             </TooltipTrigger>
             <TooltipContent>
-              <text className="bg-Charcoal text-White rounded-md p-2 shadow-sm">
+              <span className="rounded-md bg-Charcoal p-2 text-White shadow-sm">
                 Thêm mới
-              </text>
+              </span>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -302,11 +302,11 @@ const Page = () => {
       <div className="h-full w-full gap-3 p-3">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row items-center gap-3">
-            <text className="text-PersianRed font-sans text-[12px] font-bold md:text-[16px] lg:text-[20px]">
+            <span className="font-sans text-[12px] font-bold text-PersianRed md:text-[16px] lg:text-[20px]">
               Lý do lựa chọn
-            </text>
+            </span>
           </div>
-          <div className="h-full w-full gap-3 rounded-lg bg-white p-3">
+          <div className="bg-white h-full w-full gap-3 rounded-lg p-3">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
@@ -348,14 +348,14 @@ const Page = () => {
                 <div className="flex flex-row gap-4">
                   <Button
                     type="button"
-                    className="bg-PersianRed text-White w-fit p-2 px-8"
+                    className="w-fit bg-PersianRed p-2 px-8 text-White"
                     onClick={() => setDialogOpen(true)}
                   >
                     Xóa
                   </Button>
                   <Button
                     type="submit"
-                    className="bg-Charcoal text-White w-fit p-2 px-8"
+                    className="w-fit bg-Charcoal p-2 px-8 text-White"
                   >
                     Cập nhật
                   </Button>
@@ -365,7 +365,7 @@ const Page = () => {
               {mode === "view" && (
                 <Button
                   type="submit"
-                  className="bg-Charcoal text-White w-fit p-2 px-8"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White"
                 >
                   Chỉnh sửa
                 </Button>
@@ -373,7 +373,7 @@ const Page = () => {
               {mode === "create" && (
                 <Button
                   type="submit"
-                  className="bg-Charcoal text-White w-fit p-2 px-8"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White"
                 >
                   Thêm mới
                 </Button>

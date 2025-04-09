@@ -288,9 +288,9 @@ const Page = () => {
   }
 
   return (
-    <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
+    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
-        <p className="font-sans text-[20px] font-medium text-black">
+        <p className="text-black font-sans text-[20px] font-medium">
           Thông tin đánh giá
         </p>
         <TooltipProvider>
@@ -308,9 +308,9 @@ const Page = () => {
               />{" "}
             </TooltipTrigger>
             <TooltipContent>
-              <text className="bg-Charcoal text-White rounded-md p-2 shadow-sm">
+              <span className="rounded-md bg-Charcoal p-2 text-White shadow-sm">
                 Thêm mới
-              </text>
+              </span>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -321,11 +321,11 @@ const Page = () => {
       <div className="h-full w-full gap-3 p-3">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row items-center gap-3">
-            <text className="text-PersianRed font-sans text-[12px] font-bold md:text-[16px] lg:text-[20px]">
+            <span className="font-sans text-[12px] font-bold text-PersianRed md:text-[16px] lg:text-[20px]">
               Cam kết{" "}
-            </text>
+            </span>
           </div>
-          <div className="h-full w-full gap-3 rounded-lg bg-white p-3">
+          <div className="bg-white h-full w-full gap-3 rounded-lg p-3">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
@@ -359,7 +359,7 @@ const Page = () => {
                 />
               </div>
               <div
-                className={`text-Charcoal col-span-1 grid w-full gap-1.5 font-sans font-normal md:col-span-2`}
+                className={`col-span-1 grid w-full gap-1.5 font-sans font-normal text-Charcoal md:col-span-2`}
               >
                 {" "}
                 <Label className="mb-2 block">{`Hình ảnh khách hàng`}</Label>
@@ -371,7 +371,7 @@ const Page = () => {
                   />
                 )}
                 {errors.avatar && (
-                  <p className="text-PersianRed font-sans text-[12px] font-normal">
+                  <p className="font-sans text-[12px] font-normal text-PersianRed">
                     {errors.avatar?.message}
                   </p>
                 )}
@@ -390,7 +390,7 @@ const Page = () => {
                       {(mode === "edit" || mode === "create") && (
                         <button
                           type="button"
-                          className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                          className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                           onClick={() => {
                             handleRemoveImage(imageList)
                           }}
@@ -414,7 +414,7 @@ const Page = () => {
                   </Button> */}
                   <Button
                     type="submit"
-                    className="bg-Charcoal text-White w-fit p-2 px-8"
+                    className="w-fit bg-Charcoal p-2 px-8 text-White"
                   >
                     Cập nhật
                   </Button>
@@ -424,7 +424,7 @@ const Page = () => {
               {mode === "view" && (
                 <Button
                   type="submit"
-                  className="bg-Charcoal text-White w-fit p-2 px-8"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White"
                 >
                   Chỉnh sửa
                 </Button>
@@ -432,7 +432,7 @@ const Page = () => {
               {mode === "create" && (
                 <Button
                   type="submit"
-                  className="bg-Charcoal text-White w-fit p-2 px-8"
+                  className="w-fit bg-Charcoal p-2 px-8 text-White"
                 >
                   Thêm mới
                 </Button>

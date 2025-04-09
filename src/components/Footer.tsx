@@ -7,11 +7,11 @@ import logo from "../assets/images/Template Alena.png"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#AEAEAE] font-[Montserrat] text-White">
+    <footer className="bg-[#1C5B41] font-[Montserrat] text-White">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: Logo and Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-[#FFF6E8]">
             <Link href="/" className="inline-block">
               <Image src={logo} alt="" width={153} height={47} />
               <p className="mt-2 text-sm text-[#F39C12]">
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: About Us */}
-          <div>
+          <div className="text-[#FFF6E8]">
             <h3 className="mb-6 text-lg font-bold">Về chúng tôi</h3>
             <ul className="space-y-3 text-sm text-[#FFF6E8]">
               <li>
@@ -95,7 +95,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Customer Care */}
-          <div>
+          <div className="text-[#FFF6E8]">
             <h3 className="mb-6 text-lg font-bold">Chăm sóc khách hàng</h3>
             <ul className="space-y-3 text-sm text-[#FFF6E8]">
               <li className="flex items-center">
@@ -114,7 +114,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Guidelines */}
-          <div>
+          <div className="text-[#FFF6E8]">
             <h3 className="mb-6 text-lg font-bold">Hướng dẫn</h3>
             <ul className="space-y-3 text-sm text-[#FFF6E8]">
               <li>

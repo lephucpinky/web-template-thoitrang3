@@ -142,7 +142,7 @@ export default function ProductPage() {
                 className={`rounded border px-4 py-2 text-xs transition-all ${
                   selectedOptions[name] === value
                     ? "bg-Charcoal text-White"
-                    : "border-gray-200 hover:border-primary"
+                    : "border-DarkSilver/20 hover:border-primary"
                 } `}
               >
                 {value}
@@ -188,7 +188,7 @@ export default function ProductPage() {
           {selectedClassification.classifications.map((c: any) => (
             <span
               key={c.classification_name}
-              className="hover:bg-gray-500 text-primary"
+              className="text-primary hover:bg-DarkSilver/50"
             >
               {c.classification_name}: {c.classification_value}{" "}
             </span>
@@ -238,7 +238,7 @@ export default function ProductPage() {
           Trang chủ
         </Link>
         <span>/</span>
-        <Link href="/products" className="hover:underline">
+        <Link href="/san-pham" className="hover:underline">
           Sản phẩm
         </Link>
       </div>
@@ -277,7 +277,7 @@ export default function ProductPage() {
                 fill
                 className="object-contain"
               />
-              <button className="bg-white/80 absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full p-2 shadow-md">
+              <button className="absolute right-2 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-White/80 p-2 shadow-md">
                 <span className="sr-only">Next</span>
                 &gt;
               </button>
@@ -312,17 +312,6 @@ export default function ProductPage() {
             <Button className="rounded bg-[#FE9614] px-8 py-2 text-White hover:bg-[#FE9614]/60">
               MUA NGAY
             </Button>
-            <Button
-              variant="outline"
-              className="rounded border-[#FE9614] px-4 py-2 text-[#FE9614] hover:bg-[#FE9614]/50"
-            >
-              THÊM VÀO GIỎ
-            </Button>
-          </div>
-
-          <div className="mb-8 flex items-center justify-center gap-2 border p-2">
-            <Share2 size={18} />
-            <span>CHIA SẺ</span>
           </div>
         </div>
       </div>
@@ -353,11 +342,8 @@ export default function ProductPage() {
       <div className="mt-8">
         <div className="border-b">
           <div className="flex">
-            <button className="border-black border-b-2 px-6 py-3 font-medium">
+            <button className="border-b-2 border-Black px-6 py-3 font-medium">
               MÔ TẢ SẢN PHẨM
-            </button>
-            <button className="text-gray-500 px-6 py-3">
-              CHÍNH SÁCH ĐỔI HÀNG
             </button>
           </div>
         </div>
@@ -383,11 +369,14 @@ export default function ProductPage() {
         <h2 className="font-playfair mb-8 text-center text-2xl font-semibold">
           Gợi ý cho bạn
         </h2>
-        <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <Link
+          href="../san-pham"
+          className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
           {productList.map((product) => (
             <ProductCardSmall key={product._id} product={product} />
           ))}
-        </div>
+        </Link>
       </div>
     </div>
   )

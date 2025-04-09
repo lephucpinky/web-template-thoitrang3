@@ -317,18 +317,18 @@ const Page = () => {
   }, [mode])
 
   return (
-    <div className="w-full rounded-b-sm bg-white p-4">
+    <div className="bg-white w-full rounded-b-sm p-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex h-full w-full flex-col gap-2"
       >
-        <div className="h-full w-full rounded-lg bg-white p-3 shadow-md">
-          <p className="font-sans text-[20px] font-medium text-black">
+        <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
+          <p className="text-black font-sans text-[20px] font-medium">
             Thông tin cửa hàng
           </p>
           <div className="grid h-full w-full grid-cols-1 gap-3 p-3 md:grid-cols-2 lg:grid-cols-2">
             <div
-              className={`text-Charcoal col-span-1 grid w-full gap-1.5 font-sans font-normal md:col-span-2`}
+              className={`col-span-1 grid w-full gap-1.5 font-sans font-normal text-Charcoal md:col-span-2`}
             >
               <Label className="mb-2 block">Logo</Label>
               {}
@@ -341,7 +341,7 @@ const Page = () => {
                 />
               )}
               {errors.logo && (
-                <p className="text-PersianRed font-sans text-[12px] font-normal">
+                <p className="font-sans text-[12px] font-normal text-PersianRed">
                   {errors.logo.message}
                 </p>
               )}
@@ -360,7 +360,7 @@ const Page = () => {
                     {(mode === "edit" || mode === "create") && (
                       <button
                         type="button"
-                        className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                        className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                         onClick={() => {
                           handleRemoveImage(base64List)
                         }}
@@ -530,7 +530,7 @@ const Page = () => {
           </div>
 
           <div
-            className={`text-Charcoal grid w-full gap-1.5 py-2 font-sans font-normal`}
+            className={`grid w-full gap-1.5 py-2 font-sans font-normal text-Charcoal`}
           >
             {" "}
             <Label className="mb-2 block">Danh sách hình ảnh cửa hàng</Label>
@@ -542,7 +542,7 @@ const Page = () => {
               />
             )}
             {errors.images && (
-              <p className="text-PersianRed font-sans text-[12px] font-normal">
+              <p className="font-sans text-[12px] font-normal text-PersianRed">
                 {errors.images.message}
               </p>
             )}
@@ -561,7 +561,7 @@ const Page = () => {
                   {(mode === "edit" || mode === "create") && (
                     <button
                       type="button"
-                      className="absolute right-0 top-0 h-6 w-6 rounded-full bg-red-500 text-white"
+                      className="bg-red-500 text-white absolute right-0 top-0 h-6 w-6 rounded-full"
                       onClick={() => handleRemoveMoreImage(index)}
                     >
                       ×
@@ -576,7 +576,7 @@ const Page = () => {
           <div className="flex flex-row gap-4">
             <Button
               type="submit"
-              className="bg-Charcoal text-White w-fit p-2 px-8"
+              className="w-fit bg-Charcoal p-2 px-8 text-White"
             >
               Cập nhật
             </Button>
@@ -586,7 +586,7 @@ const Page = () => {
         {mode === "view" && (
           <Button
             onClick={() => handleSetMode("edit")}
-            className="bg-Charcoal text-White w-fit p-2 px-8"
+            className="w-fit bg-Charcoal p-2 px-8 text-White"
           >
             Chỉnh sửa
           </Button>
@@ -594,7 +594,7 @@ const Page = () => {
         {mode === "create" && (
           <Button
             type="submit"
-            className="bg-Charcoal text-White w-fit p-2 px-8"
+            className="w-fit bg-Charcoal p-2 px-8 text-White"
           >
             Thêm mới
           </Button>

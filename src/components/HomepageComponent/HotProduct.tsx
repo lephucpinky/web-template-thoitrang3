@@ -44,7 +44,7 @@ export default function HotProduct({ product }: ProductCardProps) {
       <SectionHeader title="SẢN PHẨM HOT" />
       {products.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 md:grid-cols-5">
-          {products.map((item: ProductFormData) => (
+          {products.slice(0, 10).map((item: ProductFormData) => (
             <ProductCard product={item} key={item._id} />
           ))}
         </div>
@@ -52,10 +52,10 @@ export default function HotProduct({ product }: ProductCardProps) {
         <p>Không có sản phẩm nào</p>
       )}
 
-      <div className="flex justify-center pb-5">
+      <div className="flex justify-center">
         <Link
           href="/san-pham"
-          className="padding-6 rounded-md bg-[#1C5B41] px-8 font-[Montserrat] text-White hover:bg-[#1C5B41]"
+          className="mb-4 rounded-md bg-[#1C5B41] px-10 py-2 font-[Montserrat] text-White hover:bg-[#1C5B41]"
         >
           Xem tất cả
         </Link>

@@ -1,21 +1,23 @@
 import ProductCard from "../product/ProductCard"
 import Image from "next/image"
-import { Button } from "../ui/button"
 import collection from "../../assets/images/Link (5).png"
 import { useEffect, useState } from "react"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
-import ProductGrid from "../product/ProductGrid"
-import { Products } from "@/constants/menu"
 import { useRouter } from "next/navigation"
-import { colorConfig } from "../config/InputConfig"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+import { useDispatch } from "react-redux"
+
 interface ProductCardProps {
   product: ProductFormData
   textColor?: string
 }
 
 export default function SaleProduct({ product }: ProductCardProps) {
+  const banner = useSelector((state: RootState) => state.banner.banner)
   const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
+  const dispatch = useDispatch()
   const router = useRouter()
   const [products, setProduct] = useState<ProductFormData[]>([])
   const [filterForm, setFilterForm] = useState<any>({
@@ -51,13 +53,15 @@ export default function SaleProduct({ product }: ProductCardProps) {
         {/* Sale Banner */}
         <div className="mb-8">
           <div className="overflow-hidden rounded-lg">
-            <Image
-              src={collection}
-              alt="/"
-              width={900}
-              height={200}
-              className="bg-yellow-400 h-auto w-full rounded-lg"
-            />
+            {banner[0]?.image_url[1] && (
+              <Image
+                src={baseUrlImage + banner[0]?.image_url[1]}
+                alt="/"
+                width={900}
+                height={200}
+                className="bg-yellow-400 h-auto w-full rounded-lg"
+              />
+            )}
           </div>
         </div>
 
