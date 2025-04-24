@@ -1,12 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import * as Yup from "yup"
-import {
-  useForm,
-  Controller,
-  FieldValues,
-  ControllerRenderProps,
-} from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { ConfigStoreInformation } from "@/types/configStoreInformation"
 import InputConfig from "@/components/inputComponent/inputRegisterLecture"
@@ -24,9 +19,9 @@ import { Label } from "@/components/ui/label"
 import AlertSuccess from "@/components/alert/AlertSuccess"
 import AlertError from "@/components/alert/AlertError"
 import { setAboutUs } from "@/store/slices/aboutUsSlice"
-import dynamic from "next/dynamic"
 import TextAreaConfig from "@/components/inputComponent/textAreaConfig"
 import CustomButtonUploadImage from "@/components/customButtomUploadImage/customButtonUploadImage"
+import Image from "next/image"
 
 const ConfigValidationSchema: any = Yup.object({
   company_name: Yup.string().required("Tên công ty là bắt buộc"),
@@ -103,7 +98,6 @@ const Page = () => {
     const file = event.target.files?.[0] // Chỉ lấy tệp đầu tiên
     if (file) {
       // Tạo preview cho ảnh
-      const preview = URL.createObjectURL(file)
 
       // Chuyển đổi tệp sang Base64
       const reader = new FileReader()
@@ -248,6 +242,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
   const handleGetAboutUs = async () => {
@@ -297,6 +292,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 

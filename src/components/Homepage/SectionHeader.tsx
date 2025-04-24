@@ -1,7 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { APIGetCategories } from "@/services/category"
 import type { ProductFormData } from "@/types/productType"
@@ -28,13 +27,9 @@ interface FilterForm {
   original_price: number | undefined
 }
 
-export default function SectionHeader({
-  title,
-  showViewAll = true,
-}: SectionHeaderProps) {
+export default function SectionHeader({ title }: SectionHeaderProps) {
   const [activeCategory, setActiveCategory] = useState("1")
 
-  const router = useRouter()
   const [categorys, setCategorys] = useState<
     { _id: string; category_name: string }[]
   >([])
@@ -109,7 +104,7 @@ export default function SectionHeader({
           className="w-full"
         >
           <CarouselContent>
-            {categorys.slice(0, 5).map((item, index) => (
+            {categorys.slice(0, 5).map((item) => (
               <CarouselItem
                 key={item._id}
                 className="pl-1 md:basis-1/3 lg:basis-1/4"

@@ -1,25 +1,25 @@
-"use client";
+"use client"
 
-import { LogOut } from "lucide-react";
+import { LogOut } from "lucide-react"
 
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import { useRouter } from "next/navigation";
+} from "@/components/ui/sidebar"
+import { useRouter } from "next/navigation"
 
-export function NavUser({}: {}) {
-  const { isMobile } = useSidebar();
-  const router = useRouter();
+export function NavUser() {
+  const { isMobile } = useSidebar()
+  const router = useRouter()
   const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("expires_at");
-    localStorage.removeItem("refresh_token_expires_in");
-    router.push("/");
-  };
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("refresh_token")
+    localStorage.removeItem("expires_at")
+    localStorage.removeItem("refresh_token_expires_in")
+    router.push("/")
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -33,5 +33,5 @@ export function NavUser({}: {}) {
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }

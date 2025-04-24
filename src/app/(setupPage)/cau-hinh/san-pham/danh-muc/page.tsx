@@ -50,7 +50,6 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm<CategoryFormData>({
     resolver: yupResolver<any>(ConfigValidationSchema()),
     defaultValues: {
@@ -97,7 +96,6 @@ const Page = () => {
     const file = event.target.files?.[0] // Chỉ lấy tệp đầu tiên
     if (file) {
       // Tạo preview cho ảnh
-      const preview = URL.createObjectURL(file)
 
       // Chuyển đổi tệp sang Base64
       const reader = new FileReader()

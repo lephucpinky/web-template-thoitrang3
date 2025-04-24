@@ -2,13 +2,15 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
 import Image from "next/image"
-import logo from "../assets/images/Template Alena.png"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 export default function Header() {
+  const aboutUs = useSelector((state: RootState) => state.aboutUs.aboutUs)
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -26,9 +28,14 @@ export default function Header() {
         <div className="hidden h-16 items-center justify-between md:flex">
           {/* Logo on left */}
           <div className="w-[24%]">
-            <Link href="/" className="w-auto text-3xl font-bold">
-              <Image src={logo} alt="" width={153} height={47} />
-            </Link>
+            {aboutUs?.logo && (
+              <Image
+                src={baseUrlImage + aboutUs?.logo}
+                alt="logo"
+                width={100}
+                height={100}
+              />
+            )}
           </div>
 
           {/* Navigation in center */}
@@ -60,9 +67,14 @@ export default function Header() {
         {/* Mobile layout */}
         <div className="ml-4 flex h-16 items-center justify-between md:hidden">
           <Link href="/" className="flex items-center">
-            <Link href="/" className="w-auto">
-              <Image src={logo} alt="" width={153} height={47} />
-            </Link>
+            {aboutUs?.logo && (
+              <Image
+                src={baseUrlImage + aboutUs?.logo}
+                alt="logo"
+                width={100}
+                height={100}
+              />
+            )}
           </Link>
 
           <button

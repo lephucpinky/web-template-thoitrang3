@@ -1,5 +1,6 @@
 export interface additionalServiceType {
-  service_name: string;
-  _id?: string;
-  description: string;
+  service_name: string
+  _id?: string
+  description: string
+  image: string
 }

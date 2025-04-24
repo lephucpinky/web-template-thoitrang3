@@ -66,7 +66,7 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="bg-White h-[64px] w-full">
+      <SidebarHeader className="h-[64px] w-full bg-White">
         <WebName teams={data.teams} />
       </SidebarHeader>{" "}
       <SidebarContent className="bg-White">

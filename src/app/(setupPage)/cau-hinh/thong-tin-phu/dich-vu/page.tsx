@@ -4,7 +4,6 @@ import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Button } from "@/components/ui/button"
 import * as Yup from "yup"
-
 import { DataTable } from "@/components/table/DataTable"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/store/store"
@@ -49,7 +48,6 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm({
     resolver: yupResolver(ConfigValidationSchema),
     defaultValues: {
@@ -162,6 +160,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -219,6 +218,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -242,6 +242,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -325,7 +326,7 @@ const Page = () => {
               Cam kết{" "}
             </span>
           </div>
-          <div className="bg-white h-full w-full gap-3 rounded-lg p-3">
+          <div className="h-full w-full gap-3 rounded-lg bg-White p-3">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
@@ -384,7 +385,7 @@ const Page = () => {
                             ? imageList
                             : process.env.NEXT_PUBLIC_BASE_URL_IMAGE + imageList
                         }
-                        alt="banner"
+                        alt="review"
                         className="h-36 w-full rounded object-contain"
                       />
                       {(mode === "edit" || mode === "create") && (

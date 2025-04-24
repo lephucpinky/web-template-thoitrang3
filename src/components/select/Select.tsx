@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 import {
   Select,
   SelectContent,
@@ -6,20 +6,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "../ui/label";
+} from "@/components/ui/select"
+import { Label } from "../ui/label"
 
 type SelectTypeProps = {
-  data?: { value: string; id: string }[];
-  label?: string;
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  onChange?: (value: string) => void;
-  value?: string;
-  defaultValue?: string;
-  error?: string;
-};
+  data?: { value: string; id: string }[]
+  label?: string
+  className?: string
+  placeholder?: string
+  disabled?: boolean
+  onChange?: (value: string) => void
+  value?: string
+  defaultValue?: string
+  error?: string
+}
 
 const SelectType: React.FC<SelectTypeProps> = ({
   data,
@@ -39,17 +39,17 @@ const SelectType: React.FC<SelectTypeProps> = ({
         <SelectTrigger
           className={`w-full min-w-48 ${
             disabled
-              ? "cursor-not-allowed border-solid bg-[#e5e7e9] border border-LightSilver font-bold text-Black" // Disabled styles
-              : "cursor-pointer bg-White text-Black border border-LightSilver" // Default styles
+              ? "cursor-not-allowed border border-solid border-LightSilver bg-[#e5e7e9] font-bold text-Black" // Disabled styles
+              : "cursor-pointer border border-LightSilver bg-White text-Black" // Default styles
           }`}
         >
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-White w-full border border-LightSilver">
+        <SelectContent className="w-full border border-LightSilver bg-White">
           <SelectGroup>
             {data &&
               data.map((item) => (
-                <SelectItem key={item.id} value={item.id} className="bg-White ">
+                <SelectItem key={item.id} value={item.id} className="bg-White">
                   {item.value}
                 </SelectItem>
               ))}
@@ -62,7 +62,7 @@ const SelectType: React.FC<SelectTypeProps> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default SelectType;
+export default SelectType

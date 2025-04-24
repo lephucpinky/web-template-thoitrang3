@@ -9,12 +9,12 @@ import "../../globals.css"
 import { useEffect } from "react"
 import { jwtDecode } from "jwt-decode"
 import { APIRefreshToken } from "@/services/auth"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { APIGetAboutUs } from "@/services/aboutUs"
 import { setAboutUs } from "@/store/slices/aboutUsSlice"
-import { Provider, useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setTokenDecode } from "@/store/slices/authSlice"
-import { RootState, store } from "@/store/store"
+import { RootState } from "@/store/store"
 import { setMode } from "@/store/slices/modeSlice"
 import { AppSidebar } from "@/components/sideBar/app-sidebar"
 
@@ -23,10 +23,8 @@ export default function ConfigLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const router = useRouter()
   const dispatch = useDispatch()
   const tokenDecode = useSelector((state: RootState) => state.auth.tokenDecode)
-  const mode = useSelector((state: RootState) => state.mode.modeInfo.mode)
   const pathname = usePathname()
 
   useEffect(() => {

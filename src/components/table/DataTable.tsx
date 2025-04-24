@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react"
+import { Button } from "@/components/ui/button"
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
   SortingState,
   getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from "@tanstack/react-table"
 import {
   Table,
   TableBody,
@@ -18,41 +17,38 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Input } from "../ui/input";
-import Pagination from "../pagination/Pagination";
-import SkeletonTable from "../skeleton/SkeletonTable";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
-import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
+} from "@/components/ui/table"
+import Pagination from "../pagination/Pagination"
+import SkeletonTable from "../skeleton/SkeletonTable"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select"
+import Image from "next/image"
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
   filterSearch?: {
-    accessorKey: string;
-    header: string;
-  };
-  titleTable?: string;
-  visible?: boolean;
-  totalItems?: number;
-  setCurrentPage?: (page: number) => void;
-  currentPage?: number;
-  loading?: boolean;
-  itemsPerPage?: number;
-  setItemsPerPage?: (page: number) => void;
-  onClickAddNew?: () => void;
-  children?: React.JSX.Element; // Nội dung của Popover
-  openValue?: boolean | undefined;
-  onClickOpenFilter?: () => void;
-  filter?: boolean;
+    accessorKey: string
+    header: string
+  }
+  titleTable?: string
+  visible?: boolean
+  totalItems?: number
+  setCurrentPage?: (page: number) => void
+  currentPage?: number
+  loading?: boolean
+  itemsPerPage?: number
+  setItemsPerPage?: (page: number) => void
+  onClickAddNew?: () => void
+  children?: React.JSX.Element // Nội dung của Popover
+  openValue?: boolean | undefined
+  onClickOpenFilter?: () => void
+  filter?: boolean
   // onClickRefresh: () => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  filterSearch,
   titleTable,
   totalItems,
   loading,
@@ -61,18 +57,14 @@ export function DataTable<TData, TValue>({
   setCurrentPage,
   setItemsPerPage,
   onClickAddNew,
-  children,
-  openValue,
-  onClickOpenFilter,
-  filter = true,
   // onClickRefresh,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  );
-  const [rowSelection, setRowSelection] = React.useState<any>({});
-  const [showAlert, setShowAlert] = useState(false); // Trạng thái hiển thị thông báo
+  )
+  const [rowSelection, setRowSelection] = React.useState({})
+  const [showAlert, setShowAlert] = useState(false) // Trạng thái hiển thị thông báo
 
   const table = useReactTable({
     data,
@@ -89,15 +81,15 @@ export function DataTable<TData, TValue>({
       columnFilters,
       rowSelection,
     },
-  });
+  })
 
   const handleItemsPerPageChange = (value: string) => {
-    setItemsPerPage && setItemsPerPage(Number(value));
-  };
-  const totalRows = data ? data.length : 0;
+    setItemsPerPage && setItemsPerPage(Number(value))
+  }
+  const totalRows = data ? data.length : 0
 
   return (
-    <div className="flex w-full flex-col gap-4 border border-LightSilver p-4 rounded-md">
+    <div className="flex w-full flex-col gap-4 rounded-md border border-LightSilver p-4">
       <div className="flex w-full flex-col items-center justify-between pt-4 md:flex-row">
         <p className="text-md text-medium_slate_blue font-[700] lg:text-[1rem]">
           {titleTable}
@@ -133,7 +125,7 @@ export function DataTable<TData, TValue>({
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header, index) => {
                     const isLastColumn =
-                      index === headerGroup.headers.length - 1;
+                      index === headerGroup.headers.length - 1
                     return (
                       <TableHead
                         key={header.id}
@@ -146,7 +138,7 @@ export function DataTable<TData, TValue>({
                               header.getContext()
                             )}
                       </TableHead>
-                    );
+                    )
                   })}
                 </TableRow>
               ))}
@@ -155,7 +147,7 @@ export function DataTable<TData, TValue>({
               {table && table.getRowModel().rows?.length > 0 ? (
                 table.getRowModel().rows.map((row, index) => {
                   const isLastColumn =
-                    index === table.getRowModel().rows.length - 1;
+                    index === table.getRowModel().rows.length - 1
                   return (
                     <TableRow
                       className={`text-center`}
@@ -164,7 +156,7 @@ export function DataTable<TData, TValue>({
                     >
                       {row.getVisibleCells().map((cell, index) => {
                         const isLastColumn =
-                          index === row.getVisibleCells().length - 1;
+                          index === row.getVisibleCells().length - 1
                         return (
                           <TableCell
                             key={cell.id}
@@ -175,10 +167,10 @@ export function DataTable<TData, TValue>({
                               cell.getContext()
                             )}
                           </TableCell>
-                        );
+                        )
                       })}
                     </TableRow>
-                  );
+                  )
                 })
               ) : (
                 <TableRow>
@@ -204,7 +196,7 @@ export function DataTable<TData, TValue>({
                 defaultValue="10"
                 onValueChange={handleItemsPerPageChange}
               >
-                <SelectTrigger className="border border-LightSilver h-[30px] w-[70px]">
+                <SelectTrigger className="h-[30px] w-[70px] border border-LightSilver">
                   {itemsPerPage}
                 </SelectTrigger>
                 <SelectContent className="bg-White">
@@ -231,5 +223,5 @@ export function DataTable<TData, TValue>({
         </div>
       )}
     </div>
-  );
+  )
 }

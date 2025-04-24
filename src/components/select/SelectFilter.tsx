@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react"
 import {
   Select,
   SelectContent,
@@ -6,19 +6,19 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Label } from '../ui/label';
+} from "@/components/ui/select"
+import { Label } from "../ui/label"
 
 type SelectFilterProps = {
-  data?: { value: string; id: string }[];
-  label?: string;
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  onChange?: (value: string) => void;
-  value?: string;
-  defaultValue?: string;
-};
+  data?: { value: string; id: string }[]
+  label?: string
+  className?: string
+  placeholder?: string
+  disabled?: boolean
+  onChange?: (value: string) => void
+  value?: string
+  defaultValue?: string
+}
 
 const SelectFilter: React.FC<SelectFilterProps> = ({
   data,
@@ -41,8 +41,8 @@ const SelectFilter: React.FC<SelectFilterProps> = ({
         <SelectTrigger
           className={`w-full ${
             disabled
-              ? 'text-black cursor-not-allowed border-solid bg-[#e5e7e9] text-[11px] font-bold' // Disabled styles
-              : 'bg-white text-black cursor-pointer text-[11px]' // Default styles
+              ? "text-black cursor-not-allowed border-solid bg-[#e5e7e9] text-[11px] font-bold" // Disabled styles
+              : "bg-white text-black cursor-pointer text-[11px]" // Default styles
           }`}
         >
           <SelectValue />
@@ -63,7 +63,7 @@ const SelectFilter: React.FC<SelectFilterProps> = ({
         </SelectContent>
       </Select>
     </div>
-  );
-};
+  )
+}
 
-export default SelectFilter;
+export default SelectFilter

@@ -1,31 +1,30 @@
-import { TokenDecode } from '@/types/auth';
-import { BannerType } from '@/types/bannerType';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TokenDecode } from "@/types/auth"
+import { createSlice } from "@reduxjs/toolkit"
 
 // Giá trị mặc định của state
 const initialState = {
   tokenDecode: <TokenDecode>{
-    id: '',
-    type: '',
-    user_name: '',
+    id: "",
+    type: "",
+    user_name: "",
     exp: 0,
     iat: 0,
   },
-};
+}
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setTokenDecode: (state, action) => {
-      state.tokenDecode = action.payload;
+      state.tokenDecode = action.payload
     },
     clearTokenDecode: (state) => {
-      state.tokenDecode = initialState.tokenDecode;
+      state.tokenDecode = initialState.tokenDecode
     },
   },
-});
+})
 
-export const { setTokenDecode, clearTokenDecode } = authSlice.actions;
+export const { setTokenDecode, clearTokenDecode } = authSlice.actions
 
-export default authSlice.reducer;
+export default authSlice.reducer

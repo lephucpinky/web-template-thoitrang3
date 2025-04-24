@@ -1,13 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import productReducer from "./slices/productSlice";
-import modeReducer from "./slices/modeSlice"; // Thêm reducer tại đây
-import aboutUsReducer from "./slices/aboutUsSlice";
-import bannerReducer from "./slices/bannerSlice";
-import authReducer from "./slices/authSlice";
-import additionalServiceReducer from "./slices/additionalServiceSlice";
-import reviewReducer from "./slices/reviewSlice";
-import categoryReducer from "./slices/categorySlice";
-import reasonReducer from "./slices/reasonSlice";
+import { configureStore } from "@reduxjs/toolkit"
+import productReducer from "./slices/productSlice"
+import modeReducer from "./slices/modeSlice" // Thêm reducer tại đây
+import aboutUsReducer from "./slices/aboutUsSlice"
+import bannerReducer from "./slices/bannerSlice"
+import authReducer from "./slices/authSlice"
+import additionalServiceReducer from "./slices/additionalServiceSlice"
+import reviewReducer from "./slices/reviewSlice"
+import categoryReducer from "./slices/categorySlice"
+import reasonReducer from "./slices/reasonSlice"
+import contactReducer from './slices/contactSlice';
 export const store = configureStore({
   reducer: {
     product: productReducer,
@@ -19,7 +20,8 @@ export const store = configureStore({
     review: reviewReducer,
     category: categoryReducer,
     reason: reasonReducer,
+    contact: contactReducer 
   },
-});
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+})
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

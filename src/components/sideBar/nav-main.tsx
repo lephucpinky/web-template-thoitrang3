@@ -1,12 +1,12 @@
-'use client';
+"use client"
 
-import { ChevronRight, type LucideIcon } from 'lucide-react';
+import { ChevronRight, type LucideIcon } from "lucide-react"
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -16,25 +16,25 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from '@/components/ui/sidebar';
-import { usePathname, useRouter } from 'next/navigation';
+} from "@/components/ui/sidebar"
+import { usePathname, useRouter } from "next/navigation"
 
 export function NavMain({
   items,
 }: {
   items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
+    title: string
+    url: string
+    icon?: LucideIcon
+    isActive?: boolean
     items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+      title: string
+      url: string
+    }[]
+  }[]
 }) {
-  const router = useRouter();
-  const pathName = usePathname();
+  const router = useRouter()
+  const pathName = usePathname()
 
   return (
     <SidebarGroup>
@@ -46,8 +46,8 @@ export function NavMain({
             defaultOpen={item.isActive}
             className={`${
               pathName.startsWith(item.url)
-                ? 'bg-Charcoal font-bold text-White hover:bg-Black hover:shadow-md'
-                : 'bg-White text-Charcoal hover:text-Charcoal hover:shadow-md'
+                ? "bg-Charcoal font-bold text-White hover:bg-Black hover:shadow-md"
+                : "bg-White text-Charcoal hover:text-Charcoal hover:shadow-md"
             } rounded-sm hover:shadow-Black`}
             onClick={() => item.url && router.push(item.url)}
           >
@@ -56,18 +56,18 @@ export function NavMain({
                 asChild
                 className={`${
                   pathName.startsWith(item.url)
-                    ? 'hover:bg-Black'
-                    : 'hover:text-Charcoal hover:shadow-sm'
+                    ? "hover:bg-Black"
+                    : "hover:text-Charcoal hover:shadow-sm"
                 } hover:shadow-sm hover:shadow-Black`}
               >
                 <SidebarMenuButton>
                   {item.icon && (
                     <item.icon
-                      color={`${pathName.startsWith(item.url) ? '#fff' : '#2A435D'}`}
+                      color={`${pathName.startsWith(item.url) ? "#fff" : "#2A435D"}`}
                     />
                   )}
                   <span
-                    className={`${pathName.startsWith(item.url) ? 'text-White' : 'text-Charcoal'}`}
+                    className={`${pathName.startsWith(item.url) ? "text-White" : "text-Charcoal"}`}
                   >
                     {item.title}
                   </span>
@@ -97,5 +97,5 @@ export function NavMain({
         ))}
       </SidebarMenu>
     </SidebarGroup>
-  );
+  )
 }

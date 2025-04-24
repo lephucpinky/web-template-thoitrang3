@@ -3,7 +3,7 @@ import { RootState } from "@/store/store"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { useDispatch } from "react-redux"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useSelector } from "react-redux"
 import { APIGetBanners } from "@/services/banner"
 import { setBanner } from "@/store/slices/bannerSlice"
@@ -21,7 +21,6 @@ export default function RootLayout({
 }>) {
   const dispatch = useDispatch()
   const customerId = process.env.NEXT_PUBLIC_CUSTOMER_ID
-  const router = useRouter()
   const pathname = usePathname()
   const aboutUs = useSelector((state: RootState) => state.aboutUs.aboutUs)
   console.log("🚀 ~ aboutUs:", aboutUs)

@@ -1,5 +1,4 @@
 "use client"
-import HeroBanner from "@/components/banner/Herobanner"
 import ProductCard from "@/components/product/ProductCard"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
@@ -27,7 +26,7 @@ interface FilterForm {
   size: string | undefined
 }
 
-export default function page() {
+export default function Page() {
   const banner = useSelector((state: RootState) => state.banner.banner)
   const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   const [colorOpen, setColorOpen] = useState(true)
@@ -69,7 +68,7 @@ export default function page() {
     try {
       const response = await APIGetProducts(filterForm)
       if (response?.status === 200) {
-        const data = response?.data.map((item: any, index: number) => ({
+        const data = response?.data.map((item: any) => ({
           ...item,
           category_name: item.category_id?.category_name,
         }))
@@ -394,16 +393,16 @@ export default function page() {
               </span>
             </div>
           )}
+          <div className="mt-8 flex items-center justify-center space-x-2">
+            {totalItems > 0 && (
+              <PaginationComponent
+                totalItems={totalItems}
+                itemsPerPage={filterForm.limit}
+                handlePageChange={handlePageChange}
+              />
+            )}
+          </div>
         </div>
-      </div>
-      <div className="mt-8 flex items-center justify-center space-x-2">
-        {totalItems > 0 && (
-          <PaginationComponent
-            totalItems={totalItems}
-            itemsPerPage={filterForm.limit}
-            handlePageChange={handlePageChange}
-          />
-        )}
       </div>
     </main>
   )

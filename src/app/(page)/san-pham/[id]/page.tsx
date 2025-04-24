@@ -1,8 +1,8 @@
 "use client"
 
-import Image, { StaticImageData } from "next/image"
+import Image from "next/image"
 import Link from "next/link"
-import { Minus, Plus, Share2 } from "lucide-react"
+import { Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useSearchParams } from "next/navigation"
 import { ProductDetailType, ProductFormData } from "@/types/productType"
@@ -14,13 +14,7 @@ import { useDispatch } from "react-redux"
 import { setReviews } from "@/store/slices/reviewSlice"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
-import ProductCard, { ProductCardSmall } from "@/components/product/ProductCard"
-interface Product {
-  id: number
-  name: string
-  price: number
-  image: string | StaticImageData
-}
+import { ProductCardSmall } from "@/components/product/ProductCard"
 
 interface GroupedClassifications {
   [key: string]: string[]
@@ -59,7 +53,7 @@ export default function ProductPage() {
   }>({})
   const [selectedClassification, setSelectedClassification] =
     useState<any>(null)
-  const [filterForm, setFilterForm] = useState<any>({
+  const [filterForm, setFilterForm] = useState({
     page: 1,
     limit: 10000,
     priority: true,
@@ -319,8 +313,8 @@ export default function ProductPage() {
       {/* Service Highlights */}
       <div className="mt-8 rounded-lg bg-[#F9F9F9] p-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {preview?.map((item: reviewType) => (
-            <div className="flex items-center gap-4">
+          {preview?.map((item: reviewType, index) => (
+            <div key={index} className="flex items-center gap-4">
               <div className="relative h-[40px] w-[40px] p-3">
                 <Image
                   src={`${baseUrlImage}${item.avatar}`}
@@ -369,14 +363,11 @@ export default function ProductPage() {
         <h2 className="font-playfair mb-8 text-center text-2xl font-semibold">
           Gợi ý cho bạn
         </h2>
-        <Link
-          href="../san-pham"
-          className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          {productList.map((product) => (
+        <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {productList.slice(0, 4).map((product) => (
             <ProductCardSmall key={product._id} product={product} />
           ))}
-        </Link>
+        </div>
       </div>
     </div>
   )

@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
+"use client"
+import React from "react"
 
 const Loading = () => {
-  return <div className="loader"></div>;
-};
+  return <div className="loader"></div>
+}
 
-export default Loading;
+export default Loading

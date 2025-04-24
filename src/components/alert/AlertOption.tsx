@@ -7,12 +7,12 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog"
 
 interface AlertOptionProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-  onConfirm: () => void;
+  isOpen: boolean
+  onOpenChange: (open: boolean) => void
+  onConfirm: () => void
 }
 
 const AlertOption: React.FC<AlertOptionProps> = ({
@@ -42,7 +42,7 @@ const AlertOption: React.FC<AlertOptionProps> = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
-};
+  )
+}
 
-export default AlertOption;
+export default AlertOption

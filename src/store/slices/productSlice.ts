@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 // Giá trị mặc định của state
 const initialState = {
@@ -11,25 +11,25 @@ const initialState = {
     image_delete: [],
   },
   setIsDeleteProduct: false,
-};
+}
 
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
     setProduct: (state, action) => {
-      state.product = action.payload;
+      state.product = action.payload
     },
     clearProduct: (state) => {
-      state.product = initialState.product;
+      state.product = initialState.product
     },
     setIsDeleteProduct: (state, action) => {
-      state.setIsDeleteProduct = action.payload;
+      state.setIsDeleteProduct = action.payload
     },
   },
-});
+})
 
 export const { setProduct, clearProduct, setIsDeleteProduct } =
-  productSlice.actions;
+  productSlice.actions
 
-export default productSlice.reducer;
+export default productSlice.reducer

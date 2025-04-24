@@ -3,9 +3,12 @@ import map from "../assets/icons/SVG (2).png"
 import location from "../assets/icons/location.png"
 import clock from "../assets/icons/clock.png"
 import Image from "next/image"
-import logo from "../assets/images/Template Alena.png"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 export default function Footer() {
+  const aboutUs = useSelector((state: RootState) => state.aboutUs.aboutUs)
+  const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   return (
     <footer className="bg-[#1C5B41] font-[Montserrat] text-White">
       <div className="container mx-auto px-4 py-12">
@@ -13,7 +16,14 @@ export default function Footer() {
           {/* Column 1: Logo and Contact Info */}
           <div className="space-y-6 text-[#FFF6E8]">
             <Link href="/" className="inline-block">
-              <Image src={logo} alt="" width={153} height={47} />
+              {aboutUs?.logo && (
+                <Image
+                  src={baseUrlImage + aboutUs?.logo}
+                  alt="logo"
+                  width={100}
+                  height={100}
+                />
+              )}
               <p className="mt-2 text-sm text-[#F39C12]">
                 Shop thời trang và phụ kiện Alena
               </p>
@@ -21,13 +31,10 @@ export default function Footer() {
 
             <div className="space-y-4">
               <div className="flex items-start gap-2">
-                <div className="h-10 w-14">
-                  <Image src={clock} alt="" width={50} height={50} />
+                <div className="h-10">
+                  <Image src={clock} alt="" width={30} height={50} />
                 </div>{" "}
-                <div className="text-sm text-[#FFF6E8]">
-                  Tầng 6, Tòa nhà Ladeco, 266 Đội Cấn, Phường Liễu Giai, Quận Ba
-                  Đình, TP Hà Nội
-                </div>
+                <div className="text-sm text-[#FFF6E8]">{aboutUs.address}</div>
               </div>
 
               <div className="flex items-start">
@@ -35,7 +42,7 @@ export default function Footer() {
                   <Image src={location} alt="" width={30} height={30} />
                 </div>
                 <div className="text-sm text-[#FFF6E8]">
-                  <p>Giờ làm việc: Từ 9:00 đến 22:00 các ngày trong tuần</p>
+                  <p>Giờ làm việc: {aboutUs.open_time}</p>
                   <p>Từ Thứ 2 đến Chủ nhật</p>
                 </div>
               </div>
@@ -46,7 +53,7 @@ export default function Footer() {
                 </div>
                 <div className="text-sm">
                   <p className="text-[#FFF6E8]">Hotline</p>
-                  <p className="text-[#F39C12]">1800 6750</p>
+                  <p className="text-[#F39C12]"> {aboutUs.phone} </p>
                 </div>
               </div>
             </div>
@@ -57,7 +64,7 @@ export default function Footer() {
             <h3 className="mb-6 text-lg font-bold">Về chúng tôi</h3>
             <ul className="space-y-3 text-sm text-[#FFF6E8]">
               <li>
-                <Link href="/trang-chu" className="hover:text-[#F39C12]">
+                <Link href="/" className="hover:text-[#F39C12]">
                   Trang chủ
                 </Link>
               </li>

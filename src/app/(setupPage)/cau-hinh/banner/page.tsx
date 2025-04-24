@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import { useForm, Controller, FieldValues } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
 import InputConfig from "@/components/inputComponent/inputRegisterLecture"
@@ -20,6 +20,7 @@ import {
 import { clearBanner, setBanner } from "@/store/slices/bannerSlice"
 import { BannerFormData } from "@/types/bannerType"
 import CustomButtonUploadImage from "@/components/customButtomUploadImage/customButtonUploadImage"
+import Image from "next/image"
 // Schema validation với Yup
 const ConfigValidationSchema: any = Yup.object({
   title: Yup.string()
@@ -148,6 +149,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -192,6 +194,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 

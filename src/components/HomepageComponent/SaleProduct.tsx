@@ -1,6 +1,5 @@
 import ProductCard from "../product/ProductCard"
 import Image from "next/image"
-import collection from "../../assets/images/Link (5).png"
 import { useEffect, useState } from "react"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
@@ -10,7 +9,7 @@ import { RootState } from "@/store/store"
 import { useDispatch } from "react-redux"
 
 interface ProductCardProps {
-  product: ProductFormData
+  product?: ProductFormData
   textColor?: string
 }
 

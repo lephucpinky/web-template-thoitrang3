@@ -1,5 +1,5 @@
-import { AboutUsType } from "@/types/aboutUsType";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AboutUsType } from "@/types/aboutUsType"
+import { createSlice } from "@reduxjs/toolkit"
 
 // Giá trị mặc định của state
 const initialState = {
@@ -22,21 +22,21 @@ const initialState = {
     map: "",
     images: [],
   },
-};
+}
 
 export const aboutUsSlice = createSlice({
   name: "aboutUs",
   initialState,
   reducers: {
     setAboutUs: (state, action) => {
-      state.aboutUs = action.payload;
+      state.aboutUs = action.payload
     },
     clearAboutUs: (state) => {
-      state.aboutUs = initialState.aboutUs;
+      state.aboutUs = initialState.aboutUs
     },
   },
-});
+})
 
-export const { setAboutUs, clearAboutUs } = aboutUsSlice.actions;
+export const { setAboutUs, clearAboutUs } = aboutUsSlice.actions
 
-export default aboutUsSlice.reducer;
+export default aboutUsSlice.reducer

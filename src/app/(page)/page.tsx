@@ -7,14 +7,10 @@ import SaleProduct from "@/components/HomepageComponent/SaleProduct"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import HeroBanner from "@/components/banner/Herobanner"
-import { ProductFormData } from "@/types/productType"
 export default function Home() {
   const aboutUs = useSelector((state: RootState) => state.aboutUs.aboutUs)
   console.log("🚀 ~ Home ~ aboutUs:", aboutUs)
 
-  interface ProductCardProps {
-    product: ProductFormData
-  }
   return (
     <>
       <main className="min-h-screen">

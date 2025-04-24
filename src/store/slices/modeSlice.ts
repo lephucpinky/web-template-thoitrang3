@@ -1,14 +1,14 @@
 // 'use client'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   modeInfo: {
-    mode: 'create',
+    mode: "create",
   },
 }
 
 const createModeSlice = createSlice({
-  name: 'modeSlice',
+  name: "modeSlice",
   initialState,
   reducers: {
     setMode: (state, action) => {

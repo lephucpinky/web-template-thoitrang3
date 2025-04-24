@@ -1,18 +1,18 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import React from "react";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import React from "react"
 
 type inputConfig = {
-  labelText: string;
-  type?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  name?: string;
-  placeholder?: string;
-  value?: any;
-  className?: string;
-  error?: string;
-  disabled?: boolean;
-};
+  labelText: string
+  type?: string
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined
+  name?: string
+  placeholder?: string
+  value?: any
+  className?: string
+  error?: string
+  disabled?: boolean
+}
 const InputConfig: React.FC<inputConfig> = ({
   labelText,
   type,
@@ -36,7 +36,7 @@ const InputConfig: React.FC<inputConfig> = ({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        className={`${className} border border-LightSilver rounded-md`}
+        className={`${className} rounded-md border border-LightSilver`}
         multiple
         disabled={disabled}
       />
@@ -46,7 +46,7 @@ const InputConfig: React.FC<inputConfig> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default InputConfig;
+export default InputConfig

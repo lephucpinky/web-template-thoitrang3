@@ -1,5 +1,5 @@
-import { BannerType } from "@/types/bannerType";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { BannerType } from "@/types/bannerType"
+import { createSlice } from "@reduxjs/toolkit"
 
 // Giá trị mặc định của state
 const initialState = {
@@ -12,21 +12,21 @@ const initialState = {
       image_delete: "",
     },
   ],
-};
+}
 
 export const bannerSlice = createSlice({
   name: "banner",
   initialState,
   reducers: {
     setBanner: (state, action) => {
-      state.banner = action.payload;
+      state.banner = action.payload
     },
     clearBanner: (state) => {
-      state.banner = initialState.banner;
+      state.banner = initialState.banner
     },
   },
-});
+})
 
-export const { setBanner, clearBanner } = bannerSlice.actions;
+export const { setBanner, clearBanner } = bannerSlice.actions
 
-export default bannerSlice.reducer;
+export default bannerSlice.reducer

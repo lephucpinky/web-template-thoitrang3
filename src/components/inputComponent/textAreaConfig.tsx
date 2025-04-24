@@ -1,13 +1,13 @@
-import { Label } from "@/components/ui/label";
-import dynamic from "next/dynamic";
-import React, { useEffect } from "react";
-import "react-quill-new/dist/quill.snow.css";
-import "quill-better-table/dist/quill-better-table.css";
+import { Label } from "@/components/ui/label"
+import dynamic from "next/dynamic"
+import React, { useEffect } from "react"
+import "react-quill-new/dist/quill.snow.css"
+import "quill-better-table/dist/quill-better-table.css"
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
   loading: () => <p>Loading editor...</p>,
-});
+})
 
 const modules = {
   toolbar: [
@@ -26,7 +26,7 @@ const modules = {
   clipboard: {
     matchVisual: true,
   },
-};
+}
 
 const formats = [
   // Headings
@@ -65,19 +65,19 @@ const formats = [
   "code-block",
   "formula",
   "script",
-];
+]
 
 type textAreaConfig = {
-  label: string;
-  type?: string;
-  name?: string;
-  placeholder?: string;
-  value?: string;
-  className?: string;
-  onChange?: (e: React.FormEvent<HTMLTextAreaElement>) => void;
-  error?: string;
-  disabled?: boolean;
-};
+  label: string
+  type?: string
+  name?: string
+  placeholder?: string
+  value?: string
+  className?: string
+  onChange?: (e: React.FormEvent<HTMLTextAreaElement>) => void
+  error?: string
+  disabled?: boolean
+}
 
 const TextAreaConfig: React.FC<textAreaConfig> = ({
   label,
@@ -93,15 +93,15 @@ const TextAreaConfig: React.FC<textAreaConfig> = ({
   useEffect(() => {
     async function loadQuill() {
       if (typeof window !== "undefined") {
-        const quill = await import("quill");
-        const betterTable = await import("quill-better-table");
+        const quill = await import("quill")
+        const betterTable = await import("quill-better-table")
         quill.default.register({
           "modules/better-table": betterTable.default,
-        });
+        })
       }
     }
-    loadQuill();
-  }, []);
+    loadQuill()
+  }, [])
 
   return (
     <div
@@ -152,7 +152,7 @@ const TextAreaConfig: React.FC<textAreaConfig> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TextAreaConfig;
+export default TextAreaConfig

@@ -14,7 +14,7 @@ import { setAboutUs } from "@/store/slices/aboutUsSlice"
 import { setTokenDecode } from "@/store/slices/authSlice"
 import { RootState } from "@/store/store"
 
-const page = () => {
+const Page = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showAlertSuccess, setShowAlertSuccess] = useState(false)
   const [showAlertError, setShowAlertError] = useState(false)
@@ -197,4 +197,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

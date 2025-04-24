@@ -1,19 +1,19 @@
-'use client'; // Mark as client-side component for hover effects and animations
+"use client" // Mark as client-side component for hover effects and animations
 
-import React from 'react';
+import React from "react"
 
 interface VisionProps {
-  title: string;
-  body: string;
+  title: string
+  body: string
 }
 
 const Vision: React.FC<VisionProps> = ({ title, body }) => {
   return (
-    <div className="relative isolate flex h-auto flex-col overflow-hidden rounded-xl font-inter text-base">
+    <div className="font-inter relative isolate flex h-auto flex-col overflow-hidden rounded-xl text-base">
       {/* Nền trong suốt */}
 
       {/* Tiêu đề */}
-      <div className="bg-yellow-fade-left z-30 bg-clip-text p-1 pl-5 pt-4 text-[24px] font-bold text-transparent transition-transform duration-300 md:text-[32px] lg:w-3/5">
+      <div className="bg-yellow-fade-left text-transparent z-30 bg-clip-text p-1 pl-5 pt-4 text-[24px] font-bold transition-transform duration-300 md:text-[32px] lg:w-3/5">
         #{title}
       </div>
 
@@ -22,7 +22,7 @@ const Vision: React.FC<VisionProps> = ({ title, body }) => {
         {body}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Vision;
+export default Vision

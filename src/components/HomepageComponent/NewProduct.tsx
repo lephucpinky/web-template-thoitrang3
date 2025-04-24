@@ -5,11 +5,9 @@ import banner from "../../assets/images/bannern.png"
 import { APIGetProducts } from "@/services/product"
 import { ProductFormData } from "@/types/productType"
 import ProductCard from "../product/ProductCard"
-import ProductGrid from "../product/ProductGrid"
-import { Products } from "@/constants/menu"
 import { useRouter } from "next/navigation"
 interface ProductCardProps {
-  product: ProductFormData
+  product?: ProductFormData
   textColor?: string
 }
 export default function NewProduct({ product }: ProductCardProps) {

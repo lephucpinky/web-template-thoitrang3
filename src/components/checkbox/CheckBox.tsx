@@ -1,19 +1,21 @@
-import { Checkbox } from '@/components/ui/checkbox';
-import React from 'react';
+import { Checkbox } from "@/components/ui/checkbox"
+import React from "react"
 
 type CheckboxType = {
-  id: string;
-  label?: string;
-  checked?: boolean;
-  disabled?: boolean;
-  onChange?: (checked: boolean) => void;
-};
+  id: string
+  label?: string
+  checked?: boolean
+  disabled?: boolean
+  value?: boolean
+  onChange?: (checked: boolean) => void
+}
 
 const CheckboxLabel: React.FC<CheckboxType> = ({
   id,
-  label = 'Ưu tiên',
+  label = "Ưu tiên",
   checked,
   disabled = false,
+  value,
   onChange,
 }) => {
   return (
@@ -32,7 +34,7 @@ const CheckboxLabel: React.FC<CheckboxType> = ({
         {label}
       </label>
     </div>
-  );
-};
+  )
+}
 
-export default CheckboxLabel;
+export default CheckboxLabel

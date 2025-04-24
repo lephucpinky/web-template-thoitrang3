@@ -34,11 +34,15 @@ import { RootState } from "@/store/store"
 import { CopyPlus } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 
+import { Label } from "@/components/ui/label"
+import CustomButtonUploadImage from "@/components/customButtomUploadImage/customButtonUploadImage"
+
 const ConfigValidationSchema = Yup.object({
   service_name: Yup.string()
     .required("Nội dung lý do là bắt buộc")
     .max(200, "Nội dung lý do tối đa 200 ký tự"),
   description: Yup.string().required("Mô tả là bắt buộc"),
+  image: Yup.mixed().required("Hình ảnh đại diện là bắt buộc"),
 })
 
 const Page = () => {
@@ -47,14 +51,13 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm({
     resolver: yupResolver(ConfigValidationSchema),
     defaultValues: {
       // image_delete: '',
-
       service_name: "",
       description: "",
+      image: "",
     },
   })
 
@@ -66,7 +69,7 @@ const Page = () => {
     (state: RootState) => state.additionalService.isDeleteAdditionalService
   )
   const dispatch = useDispatch()
-
+  const [imageList, setImageList] = useState<any>()
   const [dataTable, setDataTable] = useState([])
   const [able, setAble] = useState(false)
   const [showAlertSuccess, setShowAlertSuccess] = useState(false)
@@ -74,18 +77,41 @@ const Page = () => {
   const [alertDescription, setAlertDescription] = useState("")
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState(false)
+  //up 1 anh
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] // Chỉ lấy tệp đầu tiên
+    if (file) {
+      // Chuyển đổi tệp sang Base64
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImageList(reader.result as string) // Lưu Base64 vào state
+        setValue("image", reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleRemoveImage = (imageUrl: string) => {
+    // setValue('image_delete', imageUrl);
+    setValue("image", "")
+    setImageList("")
+  }
 
   useEffect(() => {
     if (additionalService) {
       scrollToFormProduct()
       setValue("service_name", additionalService.service_name)
       setValue("description", additionalService.description)
+      additionalService.image && setValue("image", additionalService.image)
+      setImageList(additionalService.image)
     }
   }, [additionalService, setValue])
 
   const handleClearData = () => {
     setValue("service_name", "")
     setValue("description", "")
+    setValue("image", "")
+    setImageList("")
 
     //   setValue('image_delete', []);
   }
@@ -99,6 +125,7 @@ const Page = () => {
     const body = {
       service_name: data.service_name,
       description: data.description,
+      image: imageList,
     }
 
     mode === "create" && handleCreateAdditionalService(body)
@@ -138,6 +165,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -197,6 +225,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -220,6 +249,7 @@ const Page = () => {
       setTimeout(() => {
         setShowAlertError(false)
       }, 3000)
+      console.log(err)
     }
   }
 
@@ -265,7 +295,7 @@ const Page = () => {
   }
 
   return (
-    <div className="bg-white h-full w-full rounded-lg p-3 shadow-md">
+    <div className="h-full w-full rounded-lg bg-White p-3 shadow-md">
       <div className="flex flex-row items-center gap-4">
         <p className="text-black font-sans text-[20px] font-medium">
           Thông tin lý do lựa chọn
@@ -306,53 +336,94 @@ const Page = () => {
               Lý do lựa chọn
             </span>
           </div>
-          <div className="bg-white h-full w-full gap-3 rounded-lg p-3">
+          <div className="h-full w-full gap-3 rounded-lg bg-White p-3">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
               id="formProduct"
             >
-              <div className="flex gap-4">
-                <div className="w-full">
-                  <Controller
-                    name="service_name"
-                    control={control}
-                    render={({ field }) => (
-                      <InputConfig
-                        {...field}
-                        labelText="Lý do lựa chọn"
-                        error={errors.service_name?.message}
-                        disabled={able}
-                      />
-                    )}
-                  />
-                </div>
+              <div className="grid-flow-col-1 grid flex-col gap-4 md:grid-cols-2 lg:grid-cols-2">
+                <Controller
+                  name="service_name"
+                  control={control}
+                  render={({ field }) => (
+                    <InputConfig
+                      {...field}
+                      labelText="Lý do lựa chọn"
+                      error={errors.service_name?.message}
+                      disabled={able}
+                    />
+                  )}
+                />
 
-                <div className="w-full">
-                  <Controller
-                    name="description"
-                    control={control}
-                    render={({ field }) => (
-                      <InputConfig
-                        {...field}
-                        labelText="Mô tả"
-                        error={errors.description?.message}
-                        disabled={able}
-                      />
-                    )}
-                  />
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field }) => (
+                    <InputConfig
+                      {...field}
+                      labelText="Mô tả"
+                      error={errors.description?.message}
+                      disabled={able}
+                    />
+                  )}
+                />
+                <div
+                  className={`col-span-1 grid w-full gap-1.5 font-sans font-normal text-Charcoal md:col-span-2`}
+                >
+                  {" "}
+                  <Label className="mb-2 block">{`Hình ảnh`}</Label>
+                  {}
+                  {(mode === "edit" || mode === "create") && (
+                    <CustomButtonUploadImage
+                      onImageUpload={handleImageUpload}
+                      disabled={able}
+                    />
+                  )}
+                  {errors.image && (
+                    <p className="font-sans text-[12px] font-normal text-PersianRed">
+                      {errors.image?.message}
+                    </p>
+                  )}
+                  {imageList && (
+                    <div className="flex flex-wrap gap-2">
+                      <div className="relative">
+                        <img
+                          src={
+                            imageList?.startsWith("data:image")
+                              ? imageList
+                              : process.env.NEXT_PUBLIC_BASE_URL_IMAGE +
+                                imageList
+                          }
+                          alt="service"
+                          className="h-36 w-full rounded object-contain"
+                        />
+                        {(mode === "edit" || mode === "create") && (
+                          <button
+                            type="button"
+                            className="absolute right-0 top-0 h-6 w-6 rounded-full bg-Red/50 text-White"
+                            onClick={() => {
+                              handleRemoveImage(imageList)
+                            }}
+                          >
+                            ×
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
               {mode === "edit" && (
                 <div className="flex flex-row gap-4">
-                  <Button
+                  {/* <Button
                     type="button"
                     className="w-fit bg-PersianRed p-2 px-8 text-White"
                     onClick={() => setDialogOpen(true)}
                   >
                     Xóa
-                  </Button>
+                  </Button> */}
                   <Button
                     type="submit"
                     className="w-fit bg-Charcoal p-2 px-8 text-White"

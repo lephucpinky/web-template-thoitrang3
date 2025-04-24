@@ -21,7 +21,7 @@ export default function ProductCard({
   const router = useRouter()
 
   const handleProductClick = () => {
-    window.scrollTo(0, 0)
+    //  window.scrollTo(0, 0)
     if (!product?._id || !product?.product_name) return
     const productName = product.product_name.toLowerCase().replace(/\s+/g, "-") // Chuyển tên sản phẩm thành slug
     router.push(`/san-pham/${productName}?id=${product._id}`)
@@ -34,7 +34,7 @@ export default function ProductCard({
             src={
               baseUrlImage && product?.images?.[0]
                 ? `${baseUrlImage.replace(/\/$/, "")}/${product.images[0].replace(/^\//, "")}`
-                : "/placeholder.jpg"
+                : "null"
             }
             alt={product?.product_name}
             fill
@@ -67,6 +67,13 @@ export default function ProductCard({
 }
 
 export function ProductCardSmall({ product }: ProductCardProps) {
+  const router = useRouter()
+  const handleProductClick = () => {
+    // window.scrollTo(0, 0)
+    if (!product?._id || !product?.product_name) return
+    const productName = product.product_name.toLowerCase().replace(/\s+/g, "-") // Chuyển tên sản phẩm thành slug
+    router.push(`/san-pham/${productName}?id=${product._id}`)
+  }
   const baseUrlImage = process.env.NEXT_PUBLIC_BASE_URL_IMAGE
   return (
     <div key={product._id} className="group">
@@ -82,13 +89,16 @@ export function ProductCardSmall({ product }: ProductCardProps) {
           className="aspect-square object-cover transition-transform group-hover:scale-105"
         />
       </div>
-      <div className="space-y-1">
+      <CardContent onClick={handleProductClick} className="space-y-1">
         <h3 className="text-gray-700 mb-2 line-clamp-1 text-sm font-medium">
           {product.product_name}
         </h3>
         <div className="flex items-center space-x-2">
           <span className="text-sm font-bold text-[#FE9614] line-through">
-            {product.price}
+            {product?.price?.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
           </span>
           <span className="font-poppins text-lg font-medium text-Black">
             {product?.discount_price?.toLocaleString("vi-VN", {
@@ -97,7 +107,7 @@ export function ProductCardSmall({ product }: ProductCardProps) {
             })}
           </span>
         </div>
-      </div>
+      </CardContent>
     </div>
   )
 }

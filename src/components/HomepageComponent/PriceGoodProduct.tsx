@@ -8,7 +8,7 @@ import ProductCard from "../product/ProductCard"
 import { useRouter } from "next/navigation"
 
 interface ProductCardProps {
-  product: ProductFormData
+  product?: ProductFormData
   textColor?: string
 }
 
